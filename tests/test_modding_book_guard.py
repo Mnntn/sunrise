@@ -54,6 +54,31 @@ sys.exit(42)
         raise AssertionError(f'unreadable fixture probe failed: exit {probe.returncode}')
 
 
+class BookErrorTests(unittest.TestCase):
+    """The build step fails when mdBook logs an error it would otherwise build past."""
+
+    def build(self, log):
+        step = next(step for step in yaml.safe_load(WORKFLOW.read_text())['jobs']['book']['steps']
+                    if step.get('name') == 'Build the book')
+        with tempfile.TemporaryDirectory() as directory:
+            folder = Path(directory)
+            (folder / 'log').write_text(log)
+            (folder / 'mdbook').write_text(f"#!/bin/sh\ncat '{folder / 'log'}' >&2\n")
+            (folder / 'mdbook').chmod(0o755)
+            return subprocess.run(['bash', '-e', '-o', 'pipefail', '-c', step['run']], capture_output=True, text=True,
+                                  env={**os.environ, 'PATH': f"{folder}:{os.environ['PATH']}", 'RUNNER_TEMP': directory})
+
+    def test_an_unresolved_include_fails_and_a_clean_build_passes(self):
+        clean = ("2026-11-16 20:17:06 [INFO] (mdbook::book): Book building has started\n"
+                 "unclassified: hook x: [ERROR] in a preprocessor's own text\n")
+        self.assertEqual(self.build(clean).returncode, 0)
+        broken = clean + ('2026-11-16 20:18:15 [ERROR] (mdbook::preprocess::links): Error updating "x", '
+                          'Could not read file for link\n')
+        result = self.build(broken)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('Could not read file for link', result.stdout)
+
+
 class BookGuardTests(unittest.TestCase):
     def test_parsed_workflow_keeps_scan_on_prs_and_builds_off_prs(self):
         """Pin the event gates themselves so shell tests cannot hide a skipped scan."""

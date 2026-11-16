@@ -79,8 +79,15 @@ jobs:
           echo "$folder" >> "$GITHUB_PATH"
       - if: steps.book.outputs.present == 'true'
         run: python3 -m unittest tests.test_modding_concept_pages tests.test_modding_hook_notes tests.test_neoforge_counterparts tests.test_modding_book_guard tests.test_modding_book_links tests.test_modding_sdk_tables
-      - if: steps.book.outputs.present == 'true'
-        run: mdbook build docs/modding
+      # mdBook logs a link or include it can't resolve as an [ERROR] and still succeeds, leaving the page without it.
+      - name: Build the book
+        if: steps.book.outputs.present == 'true'
+        run: |
+          mdbook build docs/modding 2>&1 | tee "$RUNNER_TEMP/mdbook.log"
+          if grep -E '^[0-9-]+ [0-9:]+ \[ERROR\]' "$RUNNER_TEMP/mdbook.log"; then
+            echo '::error::mdBook reported the errors above: a page is missing an include or link.'
+            exit 1
+          fi
       - name: Compiler cache statistics
         if: always() && steps.book.outputs.present == 'true' && runner.environment != 'github-hosted'
         run: sccache --show-stats || echo 'compiler-cache statistics unavailable'
