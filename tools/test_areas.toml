@@ -179,7 +179,7 @@ lan = ["*"]
 name = "saves"
 about = "saving and loading worlds, entities and players, region files, datafix"
 paths = [
-  "crates/sunrise-client/src/save.rs", "crates/sunrise-client/src/entity_nbt.rs",
+  "crates/sunrise-client/src/save.rs", "crates/sunrise-client/src/save/*", "crates/sunrise-client/src/entity_nbt.rs",
   "crates/sunrise-client/src/game/world/saving.rs", "crates/sunrise-client/src/game/world/persist*",
   "crates/sunrise-client/src/game/world/storage.rs", "crates/sunrise-client/src/game/world/autosave.rs",
   "crates/sunrise-world/src/region.rs", "crates/sunrise-world/src/datafix/*", "crates/sunrise-core/src/nbt.rs",
@@ -339,6 +339,25 @@ lan = [
   "looks", "body", "scale-body", "cursor", "hands", "f3_density", "fireworks", "rocket-*", "stopsound", "keys_released",
   "sprint-fov", "boat-dismount-pose", "popped_break_effects", "frames", "signs", "sign", "sign_copy", "books",
 ]
+
+[[area]]
+name = "tick-order"
+about = "the order entities and blocks tick in: the level's tick, the join-order walk"
+# `*_tick.rs`: ordered_tick.rs, and level_tick.rs once tick_world moves there.
+paths = [
+  "crates/sunrise-client/src/game/world/*_tick.rs", "crates/sunrise-client/src/join_seq.rs",
+]
+harnesses = ["tick_order", "chunk_entity_order", "entity_lookup_order"]
+
+[[area]]
+name = "client-packets"
+about = "what the client sends to a server: movement, acks, keep-alives, settings, mod channels"
+paths = [
+  "crates/sunrise-client/src/player_sync.rs", "crates/sunrise-client/src/net.rs",
+  "crates/sunrise-client/src/game/network/remote*", "crates/sunrise-protocol/src/packets/*",
+  "crates/sunrise-client/src/game/world/tick_script.rs", "tools/net_capture.py", "tools/wire_stream.py",
+]
+harnesses = ["wire_stream", "protocol_*", "item_wire", "stop_sound_wire"]
 
 [[area]]
 name = "mod-api"
