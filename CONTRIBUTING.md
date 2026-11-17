@@ -16,7 +16,7 @@ queue (the hub, or `/suggest` on Discord) rather than to issues, which are for b
 **Mod-related pull requests come here too.** Sunrise is where the mod API is built: the mod API, native hooks and
 events for mods, native mods, content mods (`.smod`), mixins, wasm mods, `cargo sunrise-mod`, `sunrise-mods`, mod
 builds and the registry, and their docs ([mods](docs/mods.md), [native mods](docs/native-mods.md)). A change to the mod
-API follows its clean-break rules ([AGENTS.md](AGENTS.md#mod-api-on-this-fork-the-clean-break)).
+API follows its clean-break rules ([AGENTS.md](AGENTS.md#mod-api-the-clean-break)).
 
 ## Build it
 
@@ -35,19 +35,25 @@ API follows its clean-break rules ([AGENTS.md](AGENTS.md#mod-api-on-this-fork-th
 
 ## Vanilla first
 
-Wherever vanilla has a feature, vanilla is the specification, down to the order of random calls. "Parity" here means
-Sunrise gives the same results as the pinned 26.3 client and server for the same inputs, checked by a **harness**: a
-`tools/test_*_parity.py` script that runs a small Java oracle against the real game and a Rust probe against Sunrise,
-and compares their outputs.
+Wherever vanilla has a feature, vanilla is the specification, down to the order of random calls. **Parity** means
+Sunrise behaves and looks bit-exactly like Minecraft: Java Edition 26.3 on the same machine: the same inputs give the
+same outputs, every float, random draw and pixel. A **harness** checks it: a `tools/test_*_parity.py` script that
+runs a small Java oracle against the real game and a Rust probe against Sunrise, and compares their outputs exactly.
 
-- **Read the vanilla code before writing Sunrise's.** `tools/rea_vanilla.py` queries the pinned game bytecode:
+- **Read the vanilla code for what it does, not how.** `tools/rea_vanilla.py` queries the pinned game bytecode:
   `python3 tools/rea_vanilla.py method net.minecraft.world.level.block.DispenserBlock dispenseFrom`.
-  Say in your pull request which vanilla classes and methods you followed.
+  Java is the reference for behaviour, never for structure or speed: code that looks like Java proves nothing, a
+  bit-exact harness does. Say in your pull request which vanilla classes and methods you read.
 - **One version: 26.3.** Parity work targets 26.3 until its parity is good, redstone first. Don't open pull requests
   that move Sunrise to a newer Minecraft version for now; to join servers on a newer version, put a Via proxy
   (ViaVersion, ViaProxy) in front of them.
 - **Gameplay changes come with a harness**, new or extended, so the next change can't silently break them.
   [The parity workflow](docs/parity-workflow.md) shows how harnesses run; copy a nearby one.
+- **Performance work stays bit-exact.** A faster path gives the same results, random draws and pixels as the code it
+  replaces. The area's harnesses prove it; if none covers the code, add one first. Add a before/after benchmark.
+- **No workarounds.** When a harness differs, fix the cause until it matches bit for bit. Never add a tolerance,
+  rounding, a special case or a compensating patch to make it pass. Removing a workaround, or a tolerance from a
+  harness, is welcome when the harnesses stay bit-exact: smaller code is a goal.
 - **Sunrise's own features** (the launcher, the new menus) follow [the design system](docs/design-system.md) and are
   off by default wherever they would change the vanilla look.
 - **Three layers: engine, platform, Sunrise.** Vanilla code never depends on the platform (mods, shader packs,
@@ -75,7 +81,7 @@ another project's source may also be read and used, **only when that project's l
 - **Java's own library is GPL too.** OpenJDK's source (`java.lang.Math`, `StrictMath`, `FdLibm`, `HashMap`, the
   sorts, `Double.toString`, HotSpot's intrinsics...) is GPL-2.0, so it is off limits like the rest. Reproduce Java's
   behaviour from its API documentation (the Javadoc) and from what a JVM returns, or from a permissive original such
-  as Sun's fdlibm C sources (see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)); see horizon-rust/horizon#6741.
+  as Sun's fdlibm C sources (see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)).
 - **Check the license yourself.** Read the LICENSE file at the commit you use and the header of each file you take:
   some repositories mix licenses, and a file under another license is off limits. A license that changed: the one at
   your commit counts. In doubt, don't: ask in #contributors first.
@@ -86,8 +92,8 @@ another project's source may also be read and used, **only when that project's l
   was changed.
 
 User documentation and file formats are fine to read, and packs and mods are fine to run and observe, whatever their
-license. Shader packs are a clean-room rewrite of the pack format, produced from a written description of it (see
-#1561): the [specification and its provenance log](docs/cleanroom/README.md) are public. They carry no foreign
+license. Shader packs are a clean-room rewrite of the pack format, produced from a written description of it:
+the [specification and its provenance log](docs/cleanroom/README.md) are public. They carry no foreign
 source, and the rules above still apply to anything you read while working on them. A shader-pack pull request
 names its sources: the sections of that specification, the documentation pages and the packs it ran.
 
@@ -98,7 +104,7 @@ names its sources: the sections of that specification, the documentation pages a
   that downloads NVIDIA's files itself, on the player's machine. No NVIDIA binaries, headers or SDK files in the
   repository.
 - **The JVM bridge** (running Java mods) is only ever a separate, optional download, never installed or on by
-  default. The game may offer to turn it on when it finds a Java mod; the player decides. Promotion out of beta requires MSPT and RAM benchmarks against Java with the same mods ([horizon-rust/horizon#13914](https://github.com/horizon-rust/horizon/issues/13914)).
+  default. The game may offer to turn it on when it finds a Java mod; the player decides. Promotion out of beta requires MSPT and RAM benchmarks against Java with the same mods.
 
 ## Before asking for review
 
@@ -119,8 +125,8 @@ It exits non-zero when something fails.
 ### CI tiers
 
 CI is split by how long a test takes and what it needs. Main and rollups run only quick checks and unit tests;
-every test that boots the game runs once a day. Existing tests that need prepared resources, a child process or the
-network and are still in `verify` are being moved by the next change of #4022.
+every test that boots the game runs once a day. `tools/ci/move_to_daily.py` moves an existing `verify` test that
+needs prepared resources, a child process or the network.
 
 | Tier | Runs on | What |
 | --- | --- | --- |
@@ -131,8 +137,7 @@ network and are still in `verify` are being moved by the next change of #4022.
 **A unit test** uses no prepared resources, boots no game, starts no child process, uses no network and no compiled
 wasm fixture, and finishes in under 2 seconds. Any other test is a daily test: it carries `#[ignore]` and a row in
 `tools/ci/ignored-tests/` (the format is in that folder's README). `verify` fails a unit test that takes over 5
-seconds and `verify-static` one that boots the game; existing tests over 2 seconds and those that boot the game are
-already daily tests, and the existing ones that need resources or a child process are being moved over.
+seconds and `verify-static` one that boots the game.
 In Linux `verify`, test binaries run normally under an inet guard: opening, binding or connecting an IPv4/IPv6
 socket or calling libc name-resolution APIs (`getaddrinfo`, `gethostbyname`/`gethostbyname2`/`gethostbyaddr`, their reentrant
 variants, or `getnameinfo`) fails the test by its full name, even if it handles the refusal. Unix sockets remain
@@ -151,7 +156,7 @@ Three kinds of build: a **snapshot**, from main's head on request, needs only th
 merge); the **nightly** is published by the daily run when every part of it is green; a **release** is cut from a
 nightly.
 
-Reviews on this fork read the diff, the design and CI; they do not run your change. So for anything a player or a
+Reviews here read the diff, the design and CI; they do not run your change. So for anything a player or a
 mod author can see, please start the game once and try it (single player is enough:
 `cargo build --profile fast -p sunrise-game`, or `sunrise-ctl` for agents) and say in one line what you did, under
 "Tried in game" in the template. It is not a gate: "no, could not run it here" is an acceptable answer, and it tells
@@ -166,7 +171,7 @@ For a quick check while you work, `python3 tools/check_changed.py` runs rustfmt,
 
 ### Translations
 
-Most translations are machine-written and remain unreviewed until a speaker checks them. See [docs/translations.md](docs/translations.md). Never mark machine-written text as reviewed.
+Machine-written translations remain unreviewed until a speaker checks them. See [docs/translations.md](docs/translations.md). Never mark machine-written text as reviewed.
 
 ## Claim before you start
 
@@ -193,7 +198,7 @@ it (edited on every push, never repeated): talk to its author in the thread befo
   needs. There's no line limit; split by concern, never by size, and don't bundle unrelated changes.
 - **Fill in the template**: what and why, the vanilla reference, the pr_ready block, screenshots for anything you
   can see.
-- **We never push to your branch on this fork.** When something small is left (a lint, a rebase, a nit) we carry
+- **We never push to your branch.** When something small is left (a lint, a rebase, a nit) we carry
   it in our own commits on top of yours in a rollup, and your pull request shows as merged with your commits
   intact; only design questions come back to you. You don't need to tick "Allow edits by maintainers".
 - **Keep your branch yours.** You can push to it as you like. If you want to bring it up to date, `git merge
@@ -241,7 +246,7 @@ new pushes, we add it again.
 
 ## Talk to us
 
-[Discord](https://discord.gg/playsunrise) for questions and ideas, [issues](https://github.com/horizon-rust/horizon/issues)
+[Discord](https://discord.gg/playsunrise) for questions and ideas, [issues](https://github.com/sunrise-org/sunrise/issues)
 for bugs. To take something on, `/claim` its issue ([above](#claim-before-you-start)).
 
 How Sunrise is run, and how people join the Team or lead a group: [GOVERNANCE.md](GOVERNANCE.md).

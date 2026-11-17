@@ -1,8 +1,8 @@
 # Sunrise: a map for agents
 
 Minecraft: Java Edition 26.3 rewritten in Rust (wgpu). Vanilla is the specification wherever it has the
-feature; performance work may differ inside as long as it stays compatible with vanilla
-([CONTRIBUTING.md](CONTRIBUTING.md#when-it-doesnt-have-to-be-11)). Read [CONTRIBUTING.md](CONTRIBUTING.md) once;
+feature: Sunrise behaves and looks bit-exactly like it on the same machine, while its code is free to differ
+([CONTRIBUTING.md](CONTRIBUTING.md#vanilla-first)). Read [CONTRIBUTING.md](CONTRIBUTING.md) once;
 this page tells you where things are.
 Feature → files → harness for the most-changed areas: [docs/architecture.md](docs/architecture.md).
 
@@ -30,7 +30,7 @@ Feature → files → harness for the most-changed areas: [docs/architecture.md]
 - Everything players run is Rust. Python/Java only for dev tools and harness drivers in `tools/`.
 - Sunrise-only features follow [docs/design-system.md](docs/design-system.md) and are off by default where
   they would change the vanilla look.
-- One concern per PR, at whatever size it needs; no line limit on the fork. Labels: `feature` (players get something new), `skip-release` (they see no
+- One concern per PR, at whatever size it needs; no line limit. Labels: `feature` (players get something new), `skip-release` (they see no
   change), none for a fix. Agents never add `release-now`: the maintainer decides it. Merges reach players through the
   nightly, published by the daily run when every leg is green ([docs/release-flow.md](docs/release-flow.md#daily-run)).
 - **CI tiers** ([CONTRIBUTING.md](CONTRIBUTING.md#ci-tiers)): every PR push runs `format` and `verify-static`; rollups,
@@ -38,8 +38,8 @@ Feature → files → harness for the most-changed areas: [docs/architecture.md]
   fixture, `fn-replace-check`, the SDK build and its linkage probe and the machine-sample build run once a day (`daily.yml`). A new test that needs prepared
   resources, boots the game, starts a child process, uses the network or a compiled wasm fixture, or takes 2 s or
   more is `#[ignore]`d with a row in `tools/ci/ignored-tests/`; say in the PR when you could not run it. A daily red
-  becomes an issue listing the suspect PRs, fixed by an ordinary PR. Existing tests still in `verify` that need
-  resources, a child process or the network are being moved by the next change of #4022. Builds: snapshot (a commit of main, gate green; published as
+  becomes an issue listing the suspect PRs, fixed by an ordinary PR. `tools/ci/move_to_daily.py` moves an existing
+  `verify` test that needs resources, a child process or the network. Builds: snapshot (a commit of main, gate green; published as
   `snapshot-<date>-<short>`, which no launcher offers), nightly (published by a fully green daily run), release (cut from a nightly).
 - **No hardcoded user-facing strings.** Keep UI translation-ready from the start. In the launcher (`launcher/`), wrap visible text with `tr("...")` or `trf("... {arg} ...", &[("arg", &val)])` from `crate::i18n` instead of raw string literals or `format!`. In the game, use translation keys (`Text::tr`, `lang::get`), never hardcoded English strings.
 - **Claim before you start**: comment `/claim` on the issue (no issue yet: open one, then claim it). An assigned
@@ -51,11 +51,14 @@ Feature → files → harness for the most-changed areas: [docs/architecture.md]
 - **Controllers reach what registers.** Draw controls with a registering helper (`ui::button`, `settings_shell::foot_button`); `graphics_style::button` and `screen_draw::button` only paint, and registering one part of a screen ends its crosshair, so register all of it.
 - **Render passes keep HDR's light.** A pass that reads, filters or redraws the world's picture (upscaling,
   anti-aliasing, sharpening, frame generation, post effects, captures) follows [docs/hdr-passes.md](docs/hdr-passes.md).
+- **Docs say where and how, not how many.** Point to where a thing lives and the command that lists or measures it.
+  Don't write counts, growing lists, timings or current status into a doc: they go stale, and the next agent
+  spends a turn fixing them.
 
-## Mod API on this fork: the clean break
+## Mod API: the clean break
 
 Sunrise (sunrise-org/sunrise) is where the native mod API is built: hooks, the `Host`, handles, Parts,
-attachments and mod loading. Tracker: #26 (design), #44 (milestones). The mod API is taking **one clean
+attachments and mod loading. The mod API is taking **one clean
 break**, and every change to it follows these rules. Reviews block a PR that breaks any of them.
 
 - **No compatibility paths.** No aliases, shims, deprecated names, migration or fallback code, version
@@ -96,17 +99,13 @@ break**, and every change to it follows these rules. Reviews block a PR that bre
 - **Fast.** No allocation, string building or scan over every mod on hot paths (tick, per-entity and
   per-block hooks). Dispatch only to the mods and parts that subscribe, resolve keys once at load, and a
   PR that touches a hot path states its tick-time effect.
-- **Differences from upstream are marked.** A change that renames or removes something horizon-rust/horizon
-  also has says "Diverges from upstream" in its PR body. Write upstream refs in full
-  (`horizon-rust/horizon#N`; a bare `#N` is this fork) and never put Fixes, Closes or Resolves before one.
 
 ## Don't lose time
 
-Where agent time went, measured on sessions and CI in November 2026: reading code, compiling `sunrise-client`,
-waiting in loops, and work someone else had already done. Tests were a small part.
+Where agent time goes: reading code, compiling `sunrise-client`, waiting in loops, and work someone else had
+already done.
 
-- **Check nobody else is on it.** One in three pull requests closed unmerged was a duplicate. Before you write
-  code, look at the issue's linked pull requests and run
+- **Check nobody else is on it.** Before you write code, look at the issue's linked pull requests and run
   `gh pr list --state open --search "<issue number, function or file name>"`; then `/claim`.
 - **Find code with the map, not by reading.** Start from the tables below and
   `python3 tools/port_ledger.py where Class.method`. Read the function you change and its callers, not whole
@@ -117,7 +116,8 @@ waiting in loops, and work someone else had already done. Tests were a small par
 - **Don't wait in loops.** Start a long command in the background and carry on, or wait for it once. No
   `sleep` or `until grep` polling of builds, harnesses or CI.
 - **One test per changed behaviour.** None for a refactor or a file move, none that reads source text, and no
-  harness where vanilla has nothing to compare (Sunrise's own features, performance work).
+  harness where vanilla has nothing to compare (Sunrise's own features). Performance work is proven by the area's
+  bit-exact harnesses (add one first if none covers the code) and a before/after benchmark.
 - **A red check isn't always yours.** When `verify` fails in a test your change can't reach, say so in the pull
   request and move on; don't hunt it.
 - **Unsure about a rule? Finish the work.** Take the reading that lets you finish, and say in the pull request
@@ -135,7 +135,7 @@ Game workspace (root `Cargo.toml`); `launcher/` and `crates/sunrise-telemetry-se
 | `sunrise-command` | Command parsing (Brigadier): the vanilla tree, argument types, selectors, suggestions, the tree's network form. Re-exported as `sunrise_client::command` |
 | `sunrise-client-core` | The client lib's bottom layer: `text.rs`, `lang.rs`, `snbt.rs`, `nbt_path.rs`, `component.rs`, `scoreboard.rs`, `bossbar.rs`, `gamerules.rs`, `block_entity_nbt.rs`, registry/particle/sound tables. Re-exported under the old paths (`sunrise_client::text`...) |
 | `sunrise-client-input` | Key bindings and key names, toggle keys, mouse options, controller settings and glyphs, the clipboard, window options (`keybinds.rs`, `gamepad.rs`, `mouse.rs`, `window.rs`...). Re-exported under the old paths |
-| `sunrise-client-render` | The client's world data, rendering and screens (chunks, meshing, light, streaming, `gfx`, HUD, menus, settings): ~80 modules that sunrise-client re-exports under the same paths. Nothing in it reaches gameplay |
+| `sunrise-client-render` | The client's world data, rendering and screens (chunks, meshing, light, streaming, `gfx`, HUD, menus, settings): its modules (`ls crates/sunrise-client-render/src`), which sunrise-client re-exports under the same paths. Nothing in it reaches gameplay |
 | `sunrise-mod-runtime` | Engine-independent mod attachment storage, query index and generic registry slot tables; depends only on `sunrise-core` |
 | `sunrise-world` | Vanilla world data with no gameplay loop: NBT, regions, chunks, `datafix/`, `worldgen/`, `level/` (server-side block behaviour, ticks, redstone), entity physics, items, effects, food, damage |
 | `sunrise-core` | Simulation primitives: Java `Random`s, `jmath` (HotSpot-exact `Math`), positions, noise, density, paletted storage, `version.rs` (the pinned version) |
@@ -151,7 +151,7 @@ Game workspace (root `Cargo.toml`); `launcher/` and `crates/sunrise-telemetry-se
 | `sunrise-native-build` | Native mods compiled against a signed prebuilt SDK: the launcher's build, and `cargo sunrise-mod native-build`'s JSON contract that every `sdk-<build id>` ships ([docs/modding/src/reference/sdk/08-native-build.md](docs/modding/src/reference/sdk/08-native-build.md)) |
 | `sunrise-port-pack` | Porting Java modpacks ([docs/modpacks.md](docs/modpacks.md)) |
 | `sunrise-optifine` | OptiFine-format pack files below every feature that reads them: `.properties`, the name/range/block matchers, paths and `optifine/` folders, and custom entity models (`cem/`: `.jem`/`.jpm` parsing and baking) |
-| `sunrise-polytone` | Polytone-format pack files (`assets/*/polytone/`), read clean-room from the public wiki: targets, biome and dimension modifiers and their environment attribute layers (#11486) |
+| `sunrise-polytone` | Polytone-format pack files (`assets/*/polytone/`), read clean-room from the public wiki: targets, biome and dimension modifiers and their environment attribute layers |
 | `sunrise-shader-api` | Sunrise's own WGSL shader packs ([docs/api/shaders.md](docs/api/shaders.md)): `sunrise-shaders.toml`, the `.sshader` package; shared by the game, the launcher and the registry |
 | `sunrise-shaders` | Shader packs (the `shaders/` folder format), rebuilt clean-room from a written spec of the format; no wgpu |
 | `sunrise-theme` | Design tokens and fonts for the launcher, the game's own menus and the website |
@@ -179,6 +179,9 @@ reads `README.md`, `launcher/links.json`, `docs/api/`, `roadmap/roadmap.json` an
 - Avoid pinning implementation details; a harmless refactor should not break a behavior test.
 - Make slow tests faster without removing cases or weakening their coverage.
 - Never delete parity harnesses or tests that pin vanilla behaviour: they are the spec.
+- No workarounds: when a harness differs, fix the cause until it matches bit for bit; never add a tolerance, rounding,
+  a special case or a compensating patch to pass it. Removing one, from the code or a harness, is welcome while the
+  harnesses stay bit-exact: smaller code is a goal.
 
 ## Build and test fast
 
@@ -201,15 +204,15 @@ python3 tools/lang_coverage.py --summary --show-keys   # the same, then the keys
   every resource, queue, device and instance, including GPU-owning workers (join them before unlocking).
   Helpers returning GPU objects leave the guard with their caller; helpers returning only CPU data may
   own it themselves, without another outer guard. CPU-only tests need no guard. Run renderer coverage
-  with `cargo test -p sunrise-client-render --lib -- gfx:: --test-threads=12`; no global serial-test flag.
+  with `cargo test -p sunrise-client-render --lib -- gfx::`; no global serial-test flag.
 
 - For a player-facing change, drive the game once with `sunrise-ctl` (launch, the action, a `state` or `screenshot`)
   and report the result in the PR's "Tried in game" line; never claim it when it was not run.
 - Harnesses and the game need the vanilla data in `.local/` (`minecraft/`, `sunrise-client/26.3`, `datagen/`,
   `tools/`): see [docs/parity-workflow.md](docs/parity-workflow.md). Without it, pr_ready lists the
   harnesses for CI.
-- A harness = `tools/test_<name>_parity.py` (324 of them) + a Java oracle (`mods/sunrise/src/test/java/dev/sunriselab/parity/Vanilla*Oracle.java`)
-  + a Rust probe: `crates/<crate>/examples/<name>_{probe,fixture}.rs` (sunrise-world 175, sunrise-client 104),
+- A harness = `tools/test_<name>_parity.py` (`python3 tools/parity.py --all --list` names them) + a Java oracle (`mods/sunrise/src/test/java/dev/sunriselab/parity/Vanilla*Oracle.java`)
+  + a Rust probe: a module `crates/<crate>/examples/probe/<name>.rs` of that crate's probe binary (`ls crates/*/examples/probe`),
   or the game binary with a fixture env var (`game/interface/dispense_fixture.rs`, `game/blocks/sculk_fixture.rs`,
   `game/administration/command_harness.rs`, `game/network/net_harness.rs`). Copy a nearby harness for a new one.
 - Native mods compile against a pinned prebuilt SDK; `[[native.mixin]]` rows compile into a function-replacement patch library.
@@ -220,7 +223,7 @@ python3 tools/lang_coverage.py --summary --show-keys   # the same, then the keys
   excludes `game.rs` and `game/`, so gameplay edits do not rebuild or select those probes.
   Source paths remain in `crates/sunrise-client/`. Measure actual harness selection on refreshed
   records with `tools/parity.py --changed-files paths.txt --list`; historical counts are not a guarantee.
-- Rust integration tests: `crates/sunrise-client/tests/` (`lan_bot.rs`, `generation_saves.rs`, `streaming_meshes.rs`).
+- Rust integration tests: `crates/sunrise-client/tests/` (`ls crates/sunrise-client/tests`).
 - Linux needs `libasound2-dev libudev-dev`; `--no-default-features` drops audio, controllers, `discord`, `friends` and `heartbeat` (the server build).
 - Run and drive the game (starts the `sunrise-client` beside `sunrise-ctl`; other arguments go to the game):
   `target/fast/sunrise-ctl --socket $PWD/ctl.sock launch --world W --creative --offscreen --wait --resources $PWD/.local/sunrise-client/26.3`,
@@ -238,9 +241,8 @@ python3 tools/lang_coverage.py --summary --show-keys   # the same, then the keys
   ([docs/decompilation-status.md](docs/decompilation-status.md)).
 - A harness runs the oracle against the real 26.3 jars and the Rust probe on the same inputs, then compares
   their JSON. Oracle runs are cached by `tools/parity_shim.py`; `--fresh` reruns them.
-- Mirror vanilla's `Math` calls with `sunrise_core::jmath`, and vanilla's RNG with `sunrise_core::random`:
-  random draws must happen in vanilla's order. Performance work may break that order where no player can rely
-  on it; the pull request says so ([CONTRIBUTING.md](CONTRIBUTING.md#when-it-doesnt-have-to-be-11)).
+- Match vanilla's `Math` results with `sunrise_core::jmath`, and vanilla's RNG with `sunrise_core::random`:
+  random draws must happen in vanilla's order, in performance work too ([CONTRIBUTING.md](CONTRIBUTING.md#vanilla-first)).
 
 ## sunrise-client: where things live
 
@@ -298,7 +300,7 @@ state stays separate from the library tests. This compiles gameplay twice for ex
 
 `game/world/integrated.rs` runs a second `Game` (`serving`) on a "Server thread" with one level per dimension;
 the window joins it as a client through memory (`remote`), exactly as a LAN guest or a dedicated server's
-player does (#1514). A window's `Game` never ticks a world itself: the old in-frame path is gone
+player does. A window's `Game` never ticks a world itself: the old in-frame path is gone
 (`--in-frame` and `--no-server-thread` only print a notice; `SUNRISE_SERVER_THREAD` is ignored).
 Open `[server-thread]` issues list the gaps left.
 
