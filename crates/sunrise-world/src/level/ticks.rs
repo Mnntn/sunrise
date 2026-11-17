@@ -4,6 +4,7 @@ use super::{states::BlockId, update::NeighborUpdater};
 use crate::fluid::FluidKind;
 use sunrise_core::fast_hash::FxHashMap;
 use sunrise_core::{
+    geometry::VoxelShape,
     position::{BlockPos, ChunkPos},
     ticks::{
         ChunkTicks, LevelTicks, ScheduleResult, ScheduledTick, TickError, TickPriority, TickTypeId,
@@ -49,6 +50,10 @@ pub struct Ticks {
     /// Worldgen shape updates collect the ticks they schedule here, for the
     /// proto chunks of their region, instead of scheduling them.
     pub(crate) capture: Option<Vec<CapturedTick>>,
+    /// Fluid passage results between published shapes, by the shapes' identity (a publish makes
+    /// a new shape, so a changed shape never finds an old result). Each entry keeps its shapes
+    /// alive, so an identity is never reused while it is here; the list is cleared when it fills.
+    pub(crate) published_passages: Vec<(VoxelShape, VoxelShape, u8, bool)>,
 }
 /// A tick scheduled while `Ticks::capture` is set.
 #[derive(Clone, Copy, Debug)]
@@ -84,6 +89,7 @@ impl Ticks {
             block_event_keys: Default::default(),
             handling_tick: false,
             capture: None,
+            published_passages: Vec::new(),
         }
     }
     /// Register a loaded chunk's saved block and fluid ticks.

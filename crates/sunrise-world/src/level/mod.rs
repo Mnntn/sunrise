@@ -1377,10 +1377,6 @@ pub struct Behaviours {
     /// Uncached (position- or block-entity-dependent) collision shapes.
     dynamic: HashMap<BlockStateId, crate::dynamic_support::DynamicSupport>,
     occlusion_cache: RwLock<HashMap<(i32, i32, u8), bool>>,
-    /// Passage results between published shapes, by the shapes' identity (a publish makes a new
-    /// shape, so a changed shape never finds an old result). Each entry keeps its shapes alive,
-    /// so an identity is never reused while it is here; the list is cleared when it fills.
-    published_occlusion_cache: RwLock<Vec<(VoxelShape, VoxelShape, u8, bool)>>,
     growth: growth::Growth,
     /// The open world's NeoForge block data maps.
     block_maps: block_maps::Slot,

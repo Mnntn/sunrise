@@ -764,7 +764,6 @@ impl Snapshot {
             liquid_blocks,
             dynamic,
             occlusion_cache: Default::default(),
-            published_occlusion_cache: Default::default(),
             growth: Default::default(),
             block_maps: Default::default(),
             fluid_interactions: Default::default(),
