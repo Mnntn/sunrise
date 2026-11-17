@@ -676,13 +676,6 @@ impl Game<'_> {
         // The GUI scale is part of the screen's size (`Screen.resize`): a
         // change remakes its build before this frame draws it.
         self.build_screen();
-        // 3D skin layers: a skin's slabs are built when it is resolved, so a
-        // change here rebuilds the players already on screen (the Options
-        // screen keeps resolving them every frame; this covers the console
-        // and a setting restored from options.txt at start).
-        if self.title.is_none() {
-            self.update_remote_skins();
-        }
     }
     pub(super) fn resize_state_of(&self, size: winit::dpi::PhysicalSize<u32>) -> ResizeState {
         let viewport = self
