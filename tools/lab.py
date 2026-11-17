@@ -41,6 +41,10 @@ VERSION = pinned_version()
 # sunrise-prepare made from them.
 GAME = LOCAL / "minecraft" / VERSION
 RESOURCES = LOCAL / "sunrise-client" / VERSION
+# The vanilla game, as the parity harnesses build and test it: none of Sunrise's extras and no controller hardware
+# (vanilla 26.3 has neither), sound kept. A harness's cargo command ends with these flags; this is the one place
+# the vanilla build is defined (docs/parity-workflow.md).
+VANILLA_GAME = ["--no-default-features", "--features", "audio"]
 
 
 def version_info(client_jar=None):
