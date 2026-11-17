@@ -201,6 +201,23 @@ fn readers_of_the_movement_keys_see_the_stick() {
 
 #[test]
 #[ignore = "daily"]
+fn mapping_state_reads_what_mapping_reads_and_follows_the_binding() {
+    playing(|game| {
+        game.focused = true;
+        let (down, bound) = game.mapping_state("key.forward").unwrap();
+        assert!(!down);
+        game.pad.state.left = [-0.7, 0.7];
+        let held = game.mapping_state("key.forward").unwrap();
+        assert_eq!(held, (true, bound), "holding it leaves the binding's hash");
+        assert_eq!(held.0, game.mapping("key.forward").unwrap().unwrap().down);
+        game.settings.keys.set("key.forward", "key.keyboard.up");
+        assert_ne!(game.mapping_state("key.forward").unwrap().1, bound);
+        assert_eq!(game.mapping_state("key.not_a_mapping"), None);
+    });
+}
+
+#[test]
+#[ignore = "daily"]
 fn pad_number_actions_select_the_hotbar_as_their_keys_do() {
     playing(|game| {
         with_player(game);

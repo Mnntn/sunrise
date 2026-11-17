@@ -69,6 +69,13 @@ pub trait ClientInputClientHost {
     #[access(ClientSetup)]
     fn mapping(&self, name: &str) -> Result<Option<KeyMapping>, TextFormError>;
     /// Side: client.
+    /// `mapping` without its label, for a mod that reads a mapping every frame: whether the
+    /// vanilla mapping `name` is held, and a hash of the key it is bound to, which changes when
+    /// the binding does. Read the label with `mapping` only when the hash changes. Allocates
+    /// nothing. `None` for a mapping `mapping` doesn't answer for.
+    #[access(ClientSetup)]
+    fn mapping_state(&self, name: &str) -> Option<(bool, u64)>;
+    /// Side: client.
     /// Holds the vanilla gameplay mapping `key` down or lets it go (`KeyMapping.setDown`): the
     /// held state its key gives it, without the click a press adds. `key` is a mapping of the
     /// movement, gameplay or inventory category (`key.attack`, `key.use`, `key.sprint`,

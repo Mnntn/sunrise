@@ -2037,6 +2037,7 @@ sunrise-client game::pad::parity_tests::a_spectators_bumpers_set_the_flying_spee
 sunrise-client game::pad::parity_tests::bumpers_step_the_hotbar_where_the_wheel_does lib daily resources
 sunrise-client game::pad::parity_tests::keyboard_handoff_keeps_the_attack_the_pad_holds lib daily resources
 sunrise-client game::pad::parity_tests::keyboard_handoff_keeps_what_the_pad_holds lib daily resources
+sunrise-client game::pad::parity_tests::mapping_state_reads_what_mapping_reads_and_follows_the_binding lib daily resources
 sunrise-client game::pad::parity_tests::pad_number_actions_select_the_hotbar_as_their_keys_do lib daily resources
 sunrise-client game::pad::parity_tests::pad_smooth_camera_binding_toggles_the_cinematic_camera lib daily resources
 sunrise-client game::pad::parity_tests::readers_of_the_movement_keys_see_the_stick lib daily resources

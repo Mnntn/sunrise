@@ -62,6 +62,9 @@ mapping a mod holds, as `KeyMapping.releaseAll` does; hold it again once the scr
 `interaction_key_mapping_triggered` fires at the attack or use as it does for the player's click, and
 its cancel and swing work the same. `key_mapping_pre` is not asked: it is about physical key and mouse
 button events. `ClientHost::mapping(name)` reads a held mapping as down, whoever holds it.
+`ClientHost::mapping_state(name)` is the same read without the label, for a HUD that reads mappings every
+frame: whether the mapping is held, and a hash of the key it is bound to. The hash changes when the binding
+does, so read the label with `mapping` only then. It allocates nothing.
 
 The game has no bare swing to add: in 26.3 a swing sends nothing of its own, and the attack mapping
 produces the swing and its packet.

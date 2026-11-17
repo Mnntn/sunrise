@@ -29,20 +29,32 @@ impl Game<'_> {
         &self,
         name: &str,
     ) -> Result<Option<mod_api::KeyMapping>, mod_api::TextFormError> {
-        let Some(&(_, key)) = MAPPINGS.iter().find(|m| m.0 == name) else {
+        let Some(down) = self.mapping_held(name) else {
             return Ok(None);
         };
-        let down = match key {
+        Ok(Some(mod_api::KeyMapping {
+            down,
+            label: keybinds::display_name(self.settings.keys.get(name)).try_into_api()?,
+        }))
+    }
+    /// `mapping` without its label: whether it is held, and a hash of the key it is bound to.
+    pub(in crate::game) fn mapping_state(&self, name: &str) -> Option<(bool, u64)> {
+        use std::hash::{Hash, Hasher};
+        let down = self.mapping_held(name)?;
+        let mut binding = std::collections::hash_map::DefaultHasher::new();
+        self.settings.keys.get(name).hash(&mut binding);
+        Some((down, binding.finish()))
+    }
+    /// Whether the vanilla mapping `name` is held, for `mapping` and `mapping_state`.
+    fn mapping_held(&self, name: &str) -> Option<bool> {
+        let &(_, key) = MAPPINGS.iter().find(|m| m.0 == name)?;
+        Some(match key {
             Some(k) => self.movement_key_held(k),
             // The button, or the mapping's own held state (a toggle, a pad, `set_mapping_down`).
             None => {
                 let use_key = usize::from(name == "key.use");
                 self.mouse_held()[use_key] || [self.left, self.right][use_key]
             }
-        };
-        Ok(Some(mod_api::KeyMapping {
-            down,
-            label: keybinds::display_name(self.settings.keys.get(name)).try_into_api()?,
-        }))
+        })
     }
 }
