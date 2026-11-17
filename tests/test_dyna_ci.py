@@ -4,6 +4,7 @@ import os
 from pathlib import Path
 import shutil
 import subprocess
+import sys
 import tempfile
 import textwrap
 import time
@@ -296,6 +297,56 @@ class DynaRoutingTests(unittest.TestCase):
         self.assertIn('echo "$CARGO_HOME/bin" >> "$GITHUB_PATH"', tools)
         self.assertLess(static.index("- name: Install Rust tools for isolated tooling fixtures"),
                         static.index("- name: Python tests of the repository's tools"))
+
+    @unittest.skipUnless(POSIX_BASH and os.name != "nt", "needs the runner's bash and POSIX paths")
+    def test_pull_requests_select_from_the_api_list_and_fetch_less_history(self):
+        sys.path.insert(0, str(ROOT / "tools/ci/vendor/pyyaml-6.0.3.zip"))
+        import yaml
+        jobs = yaml.load((ROOT / ".github/workflows/dyna-ci.yml").read_text(), Loader=yaml.BaseLoader)["jobs"]
+        changes = {step.get("name"): step for step in jobs["changes"]["steps"]}
+        listing = changes["List this pull request's files"]
+        fetch = changes["Fetch this commit's history for selection"]
+        select = changes["Select checks once for this pull request"]
+        # Pull requests only: main's pushes select nothing, so every gate job keeps running there.
+        for step in (listing, fetch, select):
+            self.assertTrue(step["if"].startswith("github.event_name == 'pull_request'"))
+        # A list that fails or times out falls back to the history, never fails the job.
+        self.assertEqual(listing["continue-on-error"], "true")
+        self.assertEqual(fetch["if"], "github.event_name == 'pull_request' && steps.files.outputs.listed != 'true'")
+        self.assertEqual(fetch["env"]["HISTORY_FILTER"], "tree:0")
+        self.assertEqual(select["env"]["FILES"],
+                         "${{ steps.files.outputs.listed == 'true' && format('{0}/pr-files', runner.temp) || '' }}")
+        # The selection step as written: the API's list when there is one, else git's diff of base...head.
+        with tempfile.TemporaryDirectory() as directory:
+            def git(*args):
+                return subprocess.check_output(["git", "-C", directory, "-c", "user.name=t", "-c", "user.email=t@t",
+                                                "-c", "commit.gpgsign=false", *args], text=True).strip()
+            git("init", "-q")
+            Path(directory, "lib.rs").write_text("fn a() {}\n")
+            git("add", ".")
+            git("commit", "-qm", "base")
+            base = git("rev-parse", "HEAD")
+            Path(directory, "lib.rs").write_text("fn b() {}\n")
+            git("commit", "-qam", "head")
+            listing_file = Path(directory, "pr-files")
+            listing_file.write_bytes(b"M\0docs/setup.md\0")
+            for files, rust in (("", "true"), (str(listing_file), "false")):
+                with self.subTest(files=files):
+                    output = Path(directory, "output")
+                    output.write_text("")
+                    env = dict(os.environ, BASE_SHA=base, HEAD_SHA="HEAD", FILES=files, GITHUB_OUTPUT=str(output))
+                    subprocess.run(["bash", "-e", "-c", select["run"].replace("tools/ci/", f"{ROOT}/tools/ci/")],
+                                   cwd=directory, env=env, check=True)
+                    self.assertIn(f"rust_required={rust}\n", output.read_text())
+        # format skips rustfmt when no Rust changed; the repository checks still run.
+        format_steps = {step.get("name"): step for step in jobs["format"]["steps"]}
+        self.assertNotIn("if", format_steps["Check repository artifacts and workflow YAML"])
+        for name in ("Install rustfmt on the pinned Rust", "Check formatting"):
+            self.assertEqual(format_steps[name]["if"], "needs.changes.outputs.rust_required != 'false'")
+        # verify-static: a pull request off our pool takes the history without file contents; pushes take all of it.
+        static = next(step for step in jobs["verify-static"]["steps"] if step.get("name") == "Fetch this commit's history")
+        self.assertEqual(static["env"]["HISTORY_FILTER"],
+                         "${{ github.event_name == 'pull_request' && env.RUNNER_KIND != 'dyna' && 'blob:none' || '' }}")
 
     @unittest.skipUnless(POSIX_BASH and os.name != "nt", "needs the runner's bash and POSIX paths")
     def test_verify_reuses_persistent_target_without_replacing_existing_paths(self):
