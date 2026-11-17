@@ -123,6 +123,51 @@ class ReleaseTrainTests(unittest.TestCase):
         api.assert_called_once()
         self.assertEqual(api.call_args.args[:3], ("api", "graphql", "--paginate"))
 
+    def test_launcher_pushes_start_for_every_crate_the_launcher_builds(self):
+        import tomllib
+        sys.path.insert(0, str(train.ROOT / "tools/ci/vendor/pyyaml-6.0.3.zip"))
+        import yaml
+        workflow = yaml.load((train.ROOT / ".github/workflows/launcher.yml").read_text(), Loader=yaml.BaseLoader)
+        paths = workflow["on"]["push"]["paths"]
+        # The launcher workspace's path crates, followed through each crate's dependencies that no feature gates; a
+        # `workspace = true` entry resolves in the crate's own workspace, the launcher's or the root's.
+        def workspace_of(folder):
+            while "workspace" not in tomllib.loads((folder / "Cargo.toml").read_text()):
+                folder = folder.parent
+            return folder
+        launcher = train.ROOT / "launcher"
+        members = [launcher] + [launcher / member for member in
+                                tomllib.loads((launcher / "Cargo.toml").read_text())["workspace"]["members"]]
+        seen, todo = set(), list(members)
+        while todo:
+            folder = todo.pop().resolve()
+            if folder in seen:
+                continue
+            seen.add(folder)
+            manifest = tomllib.loads((folder / "Cargo.toml").read_text())
+            tables = [manifest.get(key, {}) for key in ("dependencies", "build-dependencies")]
+            tables += [target.get(key, {}) for target in manifest.get("target", {}).values()
+                       for key in ("dependencies", "build-dependencies")]
+            if folder in members:
+                tables.append(manifest.get("dev-dependencies", {}))
+            for table in tables:
+                for name, spec in table.items():
+                    base = folder
+                    if isinstance(spec, dict) and spec.get("optional"):
+                        continue
+                    if isinstance(spec, dict) and spec.get("workspace"):
+                        base = workspace_of(folder)
+                        spec = tomllib.loads((base / "Cargo.toml").read_text())["workspace"]["dependencies"][name]
+                    if isinstance(spec, dict) and "path" in spec:
+                        todo.append(base / spec["path"])
+        crates = {folder.relative_to(train.ROOT).as_posix() for folder in seen}
+        self.assertIn("crates/sunrise-mod-api-gen", crates)
+        for crate in crates - {"launcher"} | {prefix.rstrip("/") for prefix in train.LAUNCHER_PATHS}:
+            with self.subTest(crate=crate):
+                self.assertTrue(crate.startswith("launcher/") or f"{crate}/**" in paths)
+        self.assertIn("Cargo.toml", paths)
+        self.assertIn(".github/workflows/launcher.yml", paths)
+
     def test_launcher_decision_shell_fails_closed_and_succeeds_normally(self):
         workflow = (train.ROOT / ".github/workflows/launcher.yml").read_text()
         step = workflow.split("      - id: decide\n", 1)[1].split("\n  build:", 1)[0]

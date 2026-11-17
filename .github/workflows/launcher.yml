@@ -25,18 +25,42 @@ on:
   push:
     branches: [main, launcher, 'launcher-*']
     paths:
-      # Everything the launcher is built and packaged from, as tools/release_train.py's LAUNCHER_PATHS.
+      # Everything the launcher is built and packaged from: tools/release_train.py's LAUNCHER_PATHS, every path crate
+      # `cargo metadata --manifest-path launcher/Cargo.toml` resolves, and the files those crates embed from outside
+      # them. A push here only starts `decide`; release_train.py still decides whether a release is due.
+      # tests/test_release_train.py checks that every path crate the launcher depends on without a feature is listed.
       - 'launcher/**'
+      - 'crates/sunrise-addresses/**'
       - 'crates/sunrise-bench/**'
+      - 'crates/sunrise-core/**'
       - 'crates/sunrise-friends/**'
+      - 'crates/sunrise-game-discovery/**'
+      - 'crates/sunrise-guest-stack/**'
+      - 'crates/sunrise-hooks/**'
       - 'crates/sunrise-mcp/**'
+      - 'crates/sunrise-mod-api-gen/**'
+      - 'crates/sunrise-mod-api-macros/**'
       - 'crates/sunrise-mod-package/**'
+      - 'crates/sunrise-mod-point-emit/**'
+      - 'crates/sunrise-mod-point-shape/**'
+      - 'crates/sunrise-mod-runtime/**'
+      - 'crates/sunrise-mod-source/**'
+      - 'crates/sunrise-mod-surface/**'
+      - 'crates/sunrise-mod-vocab/**'
       - 'crates/sunrise-native-build/**'
+      - 'crates/sunrise-perf-format/**'
+      - 'crates/sunrise-platform/**'
       - 'crates/sunrise-port-pack/**'
       - 'crates/sunrise-prepare/**'
       - 'crates/sunrise-release-sign/**'
+      - 'crates/sunrise-shader-api/**'
       - 'crates/sunrise-system/**'
       - 'crates/sunrise-theme/**'
+      # The root workspace's manifest: the crates/ path crates inherit from it (`workspace = true`).
+      - 'Cargo.toml'
+      # include_str! in sunrise-native-build and the launcher (the pinned Rust), and in sunrise-mod-package.
+      - 'tools/ci/rust-version'
+      - 'tools/mixins/narrow-reference-rule.patch'
       - 'packaging/linux/**'
       - 'packaging/icons/**'
       - '.github/workflows/launcher.yml'
