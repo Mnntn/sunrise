@@ -249,6 +249,24 @@ mod tests {
     }
 
     #[test]
+    fn a_store_owned_line_is_written_once_by_the_store() {
+        let zoom = Switch::new("sunrise-extras.txt", "zoom");
+        zoom.set(true);
+        let stores: [&dyn Store; 1] = [&zoom];
+        let stale = "fps:true\nzoom:false\n";
+        let mut text = String::new();
+        for line in stale.lines() {
+            let key = line.split(':').next().unwrap();
+            if !owns_key(&stores, "sunrise-extras.txt", key) {
+                text.push_str(line);
+                text.push('\n');
+            }
+        }
+        append_lines(&stores, "sunrise-extras.txt", &mut text);
+        assert_eq!(text, "fps:true\nzoom:true\n");
+    }
+
+    #[test]
     fn own_files_appear_once_changed_and_keep_lines_nobody_owns() {
         let dir = scratch("own-files");
         let pad = Switch::new("sunrise-pad.txt", "rumble");

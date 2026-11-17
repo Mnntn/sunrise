@@ -126,7 +126,7 @@ pub struct Extras {
     /// (`sunrise_client::mobs::skin_layers`).
     pub three_d_skin_layers: bool,
     /// Lines no setting here reads, kept in file order so a setting that moved to a store survives a run without it.
-    pub unknown: Vec<(String, String)>,
+    unknown: Vec<(String, String)>,
     /// The PvP & HUD page's options (`pvp`).
     pub pvp: crate::pvp::Pvp,
 }
@@ -210,7 +210,11 @@ impl Extras {
                 "fullbright" => e.fullbright = flag(e.fullbright),
                 "dynamicLights" => e.dynamic_lights = flag(e.dynamic_lights),
                 "zoom" => e.zoom = flag(e.zoom),
-                "zoomKey" if value.starts_with("key.") => e.zoom_key = value.to_owned(),
+                "zoomKey" => {
+                    if value.starts_with("key.") {
+                        e.zoom_key = value.to_owned();
+                    }
+                }
                 "zoomLevel" => {
                     if let Ok(v) = value.parse::<u8>() {
                         e.zoom_level = v.clamp(2, 10);
@@ -260,7 +264,11 @@ impl Extras {
                 "mouseTweaks" => e.mouse_tweaks = flag(e.mouse_tweaks),
                 "mouseTweaksWheel" => e.mouse_tweaks_wheel = flag(e.mouse_tweaks_wheel),
                 "sort" => e.sort = flag(e.sort),
-                "sortKey" if value.starts_with("key.") => e.sort_key = value.to_owned(),
+                "sortKey" => {
+                    if value.starts_with("key.") {
+                        e.sort_key = value.to_owned();
+                    }
+                }
                 "chatAnimation" => e.chat_animation = flag(e.chat_animation),
                 "chatIndicator" => e.chat_indicator = flag(e.chat_indicator),
                 sunrise_core::no_ai::KEY => e.no_ai = flag(e.no_ai),
@@ -270,8 +278,8 @@ impl Extras {
                 "splitscreenTwo" => e.splitscreen_two = value.parse().unwrap_or(0).min(2),
                 "splitscreenThree" => e.splitscreen_three = value.parse().unwrap_or(0).min(2),
                 "splitscreenNames" => e.splitscreen_names = flag(e.splitscreen_names),
-                // A new name: `wheelCyclesSettings` was written as true by every
-                // install while it was the default, so it says nothing of a choice.
+                // Retired: every install wrote `wheelCyclesSettings` as true while it was the default.
+                "wheelCyclesSettings" => {}
                 "wheelCyclesListSettings" => {
                     e.wheel_cycles_settings = flag(e.wheel_cycles_settings)
                 }
@@ -398,7 +406,7 @@ impl Extras {
         true
     }
     /// Written only once something differs from the defaults, so a vanilla
-    /// setup gains no file, but a file holding lines nobody here owns is rewritten. The settings stores of this file follow these lines
+    /// setup gains no file. The settings stores of this file follow these lines
     /// (`sunrise_hooks::settings`).
     pub fn save(&self, dir: &Path) {
         let path = dir.join(FILE);
@@ -888,6 +896,19 @@ mod tests {
     }
 
     #[test]
+    fn a_bad_value_for_a_known_key_is_dropped_not_kept() {
+        for key in ["zoomKey", "sortKey"] {
+            let e = Extras::parse(&format!("{key}:foo\n"));
+            assert!(e.unknown.is_empty());
+            let out = e.serialize();
+            assert_eq!(out.matches(&format!("\n{key}:")).count(), 1, "{out}");
+            assert!(!out.contains("foo"));
+        }
+        let e = Extras::parse("hudEditorKey:foo\n");
+        assert!(e.unknown.is_empty());
+    }
+
+    #[test]
     fn a_line_a_store_owns_is_left_to_it() {
         let e = Extras::parse("storeOwnedKey:true\nother:1\n");
         let text = e.serialize_but(&|key| key == "storeOwnedKey");
@@ -897,7 +918,8 @@ mod tests {
 
     #[test]
     fn a_saved_wheel_setting_from_before_the_default_changed_is_dropped() {
-        assert!(!Extras::parse("wheelCyclesSettings:true\n").wheel_cycles_settings);
+        let old = Extras::parse("wheelCyclesSettings:true\n");
+        assert!(!old.wheel_cycles_settings && old.unknown.is_empty());
         let on = Extras {
             wheel_cycles_settings: true,
             ..Extras::default()
