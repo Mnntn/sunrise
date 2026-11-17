@@ -123,9 +123,8 @@ New dependencies: `prost` (runtime), `protox` and `prost-build` (build only). No
 
 ### 2.2 `crates/sunrise-perf` (the reader)
 
-It is a workspace member with `publish = false`. Its program ships in the game's release folders beside sunrise-ctl
-(the `package` route of `crates/sunrise-mod-package/src/sdk/inputs.json`), so a player or an agent reads a capture
-without building it; no other shipped program links its library. It is one library and one binary, `sunrise-perf`.
+It is a workspace member with `publish = false`, a dev tool built from source (`cargo build --release -p sunrise-perf`):
+the release folders don't carry it (#2442), and no shipped program links its library. It is one library and one binary, `sunrise-perf`.
 Modules: `read` (whole-file reader), `follow` (incremental reader), `ids` (§5.2), `query` (§6),
 `stats` (§6.6), `summary` (§5), `export` (pprof, folded, Perfetto), `attach`, `cli`, `mcp` (§8), `wasm` (C-ABI exports
 for the web UI, behind feature `wasm`).
