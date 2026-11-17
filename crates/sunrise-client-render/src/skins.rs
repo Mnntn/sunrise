@@ -987,14 +987,11 @@ const BOUNDS: Bounds = Bounds {
 /// without end; the disk cache holds everything it drops.
 const MAX_SKIN_IMAGES: usize = 1024;
 impl Downloader {
-    /// The decoded 64×64 RGBA image an atlas location holds, when it is
-    /// still in memory (3D skin layers builds its geometry from it, and the
-    /// disk cache backs whatever was dropped).
+    /// The decoded 64×64 RGBA image an atlas location holds, when it is still in memory (Realms).
     pub fn image(&self, location: &str) -> Option<&[u8]> {
         self.images.get(location).map(Vec::as_slice)
     }
-    /// Keeps a decoded image under `location` for the images read back later
-    /// (a launcher's offline skin, which skips `queue`).
+    /// Keeps the launcher's offline cape for `again`, as it skips `queue`.
     pub fn remember_image(&mut self, location: &str, rgba: &[u8]) {
         self.remember(location.to_owned(), rgba.to_vec());
     }
