@@ -271,7 +271,7 @@ about = "command parsing and execution, functions, scoreboards, selectors, data 
 paths = [
   "crates/sunrise-command/*", "crates/sunrise-client/src/game/administration/*", "crates/sunrise-client/src/scoreboard_cmd.rs",
   "crates/sunrise-client/src/data_cmd.rs", "crates/sunrise-client-core/src/scoreboard.rs",
-  "crates/sunrise-client-core/src/nbt_path.rs", "crates/sunrise-client/src/game/world/server_reload/*",
+  "crates/sunrise-world/src/nbt_path.rs", "crates/sunrise-client/src/game/world/server_reload/*",
   "tools/command_exec_corpus.py", "tools/command_parse_corpus.py",
 ]
 cargo = [
