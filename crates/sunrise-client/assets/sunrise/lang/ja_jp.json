@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy は 1.8.9 と同じように戦闘を描画します: 手元のアイテム、その振り、食事、弓、使用を押し続けたときの剣、ヒット後の沈み込みや攻撃インジケーターなし。見た目だけで、サーバーに送る内容は変わりません。",
   "sunrise.pvp.combat_indicator": "Legacy での攻撃インジケーター",
   "sunrise.pvp.combat_indicator.tooltip": "Legacy でも攻撃インジケーターを残します (1.8.9 にはありませんでした)。",
-  "sunrise.pvp.combat_rules": "ホストするワールドで 1.8 の戦闘",
-  "sunrise.pvp.combat_rules.tooltip": "シングルプレイと LAN に公開したワールドは 1.8.9 のルールで戦います: 攻撃クールダウンとスイープなし、1.8 の武器ダメージ、攻撃力上昇、ダメージ増加、クリティカルヒット。参加するサーバーは独自のルールのままです。",
   "sunrise.pvp.combat_sounds": "1.8 のヒット音",
   "sunrise.pvp.combat_sounds.tooltip": "Legacy のとき、1.9 で追加された攻撃音 (強、弱、スイープ、クリティカルなど) を省きます。被弾音は残ります。",
   "sunrise.pvp.corner.bottom_left": "左下",

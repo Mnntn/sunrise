@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Mae Legacy yn tynnu ymladd fel y gwnaeth 1.8.9: yr eitem yn eich llaw, ei siglo, bwyta, y bwa a chleddyf wedi'i godi tra byddwch yn dal y botwm defnyddio, heb y disgyn ar ôl pob trawiad na'r dangosydd ymosod. Yr olwg yn unig: mae'r hyn a anfonwch i weinydd yn aros yr un fath.",
   "sunrise.pvp.combat_indicator": "Dangosydd ymosod yn Legacy",
   "sunrise.pvp.combat_indicator.tooltip": "Yn cadw'r dangosydd ymosod o dan Legacy, nad oedd gan 1.8.9.",
-  "sunrise.pvp.combat_rules": "Ymladd 1.8 yn y bydoedd yr ydych yn eu cynnal",
-  "sunrise.pvp.combat_rules.tooltip": "Mae un-chwaraewr a'r bydoedd a agorwch i LAN yn ymladd yn ôl rheolau 1.8.9: dim oedi ymosod na lledu, difrod arfau 1.8, Cryfder, Miniogrwydd a thrawiadau critigol. Mae gweinyddion yr ymunwch â nhw yn cadw eu rheolau eu hunain.",
   "sunrise.pvp.combat_sounds": "Seiniau taro 1.8",
   "sunrise.pvp.combat_sounds.tooltip": "O dan Legacy, yn gadael allan y seiniau ymosod a ychwanegwyd yn 1.9 (cryf, gwan, lledu, critigol...). Mae seiniau anafu yn aros.",
   "sunrise.pvp.corner.bottom_left": "Chwith isaf",

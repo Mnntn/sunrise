@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy pugnas sicut 1.8.9 pingit: rem in manu tua, ictum eius, edere, arcum et gladium elevatum dum usum tenes, sine demissione post quemque ictum aut indicatore oppugnationis. Solum aspectus: quod servo mittis idem manet.",
   "sunrise.pvp.combat_indicator": "Indicator oppugnationis in Legacy",
   "sunrise.pvp.combat_indicator.tooltip": "Indicator oppugnationis sub Legacy servat, quod 1.8.9 non habuit.",
-  "sunrise.pvp.combat_rules": "Pugna 1.8 in mundis quibus praees",
-  "sunrise.pvp.combat_rules.tooltip": "Ludus singularis et mundi quos in LAN aperis regulis 1.8.9 pugnant: sine mora oppugnationis aut ictu verrente, damno telorum 1.8, Robore, Acumine et ictibus criticis. Servi quibus iungeris sua iura servant.",
   "sunrise.pvp.combat_sounds": "Soni ictuum 1.8",
   "sunrise.pvp.combat_sounds.tooltip": "Sub Legacy, sonos oppugnationis quos 1.9 addidit omittit (fortis, debilis, verrens, criticus...). Soni vulneris manent.",
   "sunrise.pvp.corner.bottom_left": "Imum sinistrum",

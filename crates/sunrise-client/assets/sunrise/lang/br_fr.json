@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "An Hêrezh a dres an emgannoù evel ma rae 1.8.9 : an elfenn en ho torn, he lusk, debriñ, ar wareg hag ur c'hleze savet pa zalc'hit implijout, hep an diskenn goude pep taol nag ar merker tagadenn. Ne cheñch nemet an neuz : ar pezh a gasit d'ur servijer a chom heñvel.",
   "sunrise.pvp.combat_indicator": "Merker tagadenn en Hêrezh",
   "sunrise.pvp.combat_indicator.tooltip": "Mirout a ra ar merker tagadenn en Hêrezh, ar pezh n'en doa ket 1.8.9.",
-  "sunrise.pvp.combat_rules": "Emgann 1.8 er bedoù a herberc'hit",
-  "sunrise.pvp.combat_rules.tooltip": "Ar mod c'hoarier hepken hag ar bedoù a zigorit d'ar LAN a emgann hervez reolennoù 1.8.9 : amzer yenaat ebet nag a skub, drougiezh armoù 1.8, Strength, Sharpness ha taolioù kritik. Ar servijerioù ma kemerit perzh a vir o reolennoù dezho.",
   "sunrise.pvp.combat_sounds": "Sonioù an taolioù 1.8",
   "sunrise.pvp.combat_sounds.tooltip": "En Hêrezh, lezel a ra a-gostez ar sonioù tagadenn ouzhpennet gant 1.9 (kreñv, gwan, skub, kritik...). Chom a ra ar sonioù gloaz.",
   "sunrise.pvp.corner.bottom_left": "Traoñ a-gleiz",

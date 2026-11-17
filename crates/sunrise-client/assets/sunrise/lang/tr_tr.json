@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Eski, dövüşleri 1.8.9'daki gibi çizer: elinizdeki eşya, savurması, yemek yeme, yay ve kullan tuşunu basılı tutarken kalkık tutulan kılıç, her vuruştan sonraki eğilme veya saldırı göstergesi olmadan. Yalnızca görünüş: sunucuya gönderdiğiniz şey aynı kalır.",
   "sunrise.pvp.combat_indicator": "Eski'de saldırı göstergesi",
   "sunrise.pvp.combat_indicator.tooltip": "Saldırı göstergesini Eski altında tutar, 1.8.9'da yoktu.",
-  "sunrise.pvp.combat_rules": "Barındırdığınız dünyalarda 1.8 savaşı",
-  "sunrise.pvp.combat_rules.tooltip": "Tek oyunculu ve LAN'a açtığınız dünyalar 1.8.9'un kurallarıyla dövüşür: saldırı bekleme süresi veya süpürme yok, 1.8 silah hasarı, Güç, Keskinlik ve kritik vuruşlar. Katıldığınız sunucular kendi kurallarını korur.",
   "sunrise.pvp.combat_sounds": "1.8 vuruş sesleri",
   "sunrise.pvp.combat_sounds.tooltip": "Eski altında, 1.9'un eklediği saldırı seslerini (güçlü, zayıf, süpürme, kritik...) dışarıda bırakır. Hasar sesleri kalır.",
   "sunrise.pvp.corner.bottom_left": "Sol alt",

@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy tekna stríð, sum 1.8.9 gjørdi: lutin í tíni hond, sveigg hansara, at eta, bogin og eitt svørð hildið upp, meðan tú heldur brúk, uttan dýpið eftir hvørt rak ella álopsvísarin. Bert útsjóndin: tað, tú sendir einum ambætara, verður tað sama.",
   "sunrise.pvp.combat_indicator": "Álopsvísari í Legacy",
   "sunrise.pvp.combat_indicator.tooltip": "Heldur álopsvísaran undir Legacy, sum 1.8.9 ikki hevði.",
-  "sunrise.pvp.combat_rules": "1.8-stríð í heimum, tú hýsir",
-  "sunrise.pvp.combat_rules.tooltip": "Einspælari og heimarnir, tú letur upp fyri LAN, stríðast eftir reglum 1.8.9: ongin álopskøling ella sveip, vápnaskaði 1.8, Strength, Sharpness og kritisk rak. Ambætarar, tú meldar teg til, halda sínar egnu reglur.",
   "sunrise.pvp.combat_sounds": "1.8-raksljóð",
   "sunrise.pvp.combat_sounds.tooltip": "Undir Legacy, sleppur álopsljóðunum, sum 1.9 legði afturat (sterk, veik, sveip, kritisk...). Særðsljóð verða verandi.",
   "sunrise.pvp.corner.bottom_left": "Niðast til vinstru",

@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Klassik döyüşləri 1.8.9 kimi çəkir: əlinizdəki əşya, onun yellənməsi, yemək, yay və istifadə düyməsini basılı saxlayanda qaldırılmış qılınc, hər vuruşdan sonra enmə və hücum göstəricisi olmadan. Yalnız görünüş: serverə göndərdikləriniz eyni qalır.",
   "sunrise.pvp.combat_indicator": "Klassikdə hücum göstəricisi",
   "sunrise.pvp.combat_indicator.tooltip": "1.8.9-da olmayan hücum göstəricisini Klassik altında saxlayır.",
-  "sunrise.pvp.combat_rules": "Ev sahibliyi etdiyiniz dünyalarda 1.8 döyüşü",
-  "sunrise.pvp.combat_rules.tooltip": "Tək oyunçu və LAN-a açdığınız dünyalar 1.8.9 qaydaları ilə döyüşür: hücum soyuması və süpürmə yoxdur, 1.8 silah zərəri, Güc, Kəskinlik və kritik vuruşlar. Qoşulduğunuz serverlər öz qaydalarını saxlayır.",
   "sunrise.pvp.combat_sounds": "1.8 vuruş səsləri",
   "sunrise.pvp.combat_sounds.tooltip": "Klassik altında 1.9-un əlavə etdiyi hücum səslərini (güclü, zəif, süpürmə, kritik...) daxil etmir. Yaralanma səsləri qalır.",
   "sunrise.pvp.corner.bottom_left": "Aşağı sol",

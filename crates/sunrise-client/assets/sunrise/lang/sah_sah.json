@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy сэриилэри 1.8.9 курдук ойуулуур: илиигэр баар предмет, кини салайыыта, аһааһын, ыйаа уонна тутууну тутан олордоххуна үөһэ ытыллыбыт кыын, хас саба түһүү кэнниттэн намтаабат уонна attack indicator суох. Көстүү эрэ: серверга ыытаргын уларыппат.",
   "sunrise.pvp.combat_indicator": "Legacy-гэ attack indicator",
   "sunrise.pvp.combat_indicator.tooltip": "Legacy анныгар attack indicator хаалларар, 1.8.9-ҕэ суоҕа.",
-  "sunrise.pvp.combat_rules": "Бэйэҥ ыытар аан дойдуларгар 1.8 сэриитэ",
-  "sunrise.pvp.combat_rules.tooltip": "Соҕотох оонньуу уонна LAN-ҥа аһар аан дойдулар 1.8.9 быраабылаларынан сэриилэһэллэр: attack cooldown эбэтэр свип суох, 1.8 сэрии сэбин кыаҕа, Strength, Sharpness уонна критика саба түһүүлэрэ. Кыттыһар сервердар бэйэлэрин быраабылаларын хааллараллар.",
   "sunrise.pvp.combat_sounds": "1.8 саба түһүү тыастара",
   "sunrise.pvp.combat_sounds.tooltip": "Legacy анныгар 1.9 эппит саба түһүү тыастарын (күүстээх, мөлтөх, свип, критика...) таһаарбат. Охтуу тыастара хаалаллар.",
   "sunrise.pvp.corner.bottom_left": "Аллара хаҥас",

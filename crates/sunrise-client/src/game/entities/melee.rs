@@ -19,10 +19,6 @@ impl Game<'_> {
         if !partial.is_finite() {
             return None;
         }
-        // 1.8.9 had no attack cooldown.
-        if self.legacy_rules() {
-            return Some(1.0);
-        }
         let delay = sunrise_client::attack_strength::delay(self.main_hand_attack_speed());
         Some(((self.attack_ticks as f32 + partial) / delay).clamp(0.0, 1.0))
     }
@@ -43,10 +39,6 @@ impl Game<'_> {
         crit: bool,
         target: &str,
     ) -> Option<[f64; 3]> {
-        // The sweep came with 1.9.
-        if self.legacy_rules() {
-            return None;
-        }
         // Player.getSpeed: the movement speed attribute as it is now (the
         // field is only refreshed by the local movement step, never for a
         // server's player).
@@ -289,32 +281,18 @@ impl Game<'_> {
         if landed {
             if knockback > 0.0 {
                 let (xd, zd) = self.extra_knockback_direction();
-                if self.legacy_rules() {
-                    let m = &mut self.mobs[index];
-                    let v = [m.velocity.x, m.velocity.y, m.velocity.z];
-                    let [x, y, z] = sunrise_client::legacy_combat::extra_knockback(
-                        v,
-                        f64::from(knockback),
-                        (xd, zd),
-                    );
-                    m.velocity = Vec3::new(x, y, z);
-                    m.needs_sync = true;
-                } else {
-                    let plan =
-                        self.prepare_knockback_credit(self.mobs[index].id as i32, None, &attack);
-                    let mut credit = plan.lend(&mut self.last_hurt_by_player);
-                    let level =
-                        crate::game::entity::damage_level_of!(self, &attack, &mut credit, None);
-                    self.mobs[index].knockback_full(
-                        level,
-                        f64::from(knockback),
-                        xd,
-                        zd,
-                        &source,
-                        amount,
-                        true,
-                    );
-                }
+                let plan = self.prepare_knockback_credit(self.mobs[index].id as i32, None, &attack);
+                let mut credit = plan.lend(&mut self.last_hurt_by_player);
+                let level = crate::game::entity::damage_level_of!(self, &attack, &mut credit, None);
+                self.mobs[index].knockback_full(
+                    level,
+                    f64::from(knockback),
+                    xd,
+                    zd,
+                    &source,
+                    amount,
+                    true,
+                );
                 self.stop_sprint_after_extra_knockback();
             }
             let mob = &self.mobs[index];
@@ -446,10 +424,6 @@ impl Game<'_> {
         living: bool,
         victim: Option<u32>,
     ) -> ((f32, f32, bool, bool), bool) {
-        if self.legacy_rules() {
-            let hit = self.legacy_melee_damage(target_kind, living);
-            return (hit, hit.0 > 0.0);
-        }
         let hand_damage = self.attack_damage();
         // Riptide's spin replaces the attack damage attribute.
         let spin = self.player.as_ref().map_or(0.0, |p| p.auto_spin_attack_dmg);

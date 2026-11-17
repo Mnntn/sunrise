@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy joonistab võitlusi nagu 1.8.9: ese sinu käes, selle hoob, söömine, vibu ja mõõk üles tõstetuna, kui hoiad kasutusnuppu, ilma iga tabamuse järel toimuva vajumise ja rünnakuindikaatorita. Ainult välimus: see, mida serverile saadad, jääb samaks.",
   "sunrise.pvp.combat_indicator": "Rünnakuindikaator Legacys",
   "sunrise.pvp.combat_indicator.tooltip": "Jätab rünnakuindikaatori alles Legacys, mida 1.8.9-s polnud.",
-  "sunrise.pvp.combat_rules": "1.8 võitlus maailmades, mida hostid",
-  "sunrise.pvp.combat_rules.tooltip": "Üksikmäng ja maailmad, mille LAN-i avad, võitlevad 1.8.9 reeglite järgi: rünnaku jahutusaja ja laiahoobi puudumine, 1.8 relvakadu, Tugevus, Teravus ja kriitilised tabamused. Serverid, millega liitud, hoiavad oma reegleid.",
   "sunrise.pvp.combat_sounds": "1.8 löögihelid",
   "sunrise.pvp.combat_sounds.tooltip": "Legacys jätab välja 1.9-ga lisatud rünnakuhelid (tugev, nõrk, lai, kriitiline...). Haigetsaamise helid jäävad.",
   "sunrise.pvp.corner.bottom_left": "All vasakul",

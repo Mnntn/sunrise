@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy מצייר קרבות כפי ש-1.8.9 עשה: הפריט שבידך, הנפתו, אכילה, הקשת וחרב מורמת כשאתה מחזיק שימוש, בלי השקיעה שאחרי כל פגיעה או מחוון ההתקפה. רק המראה: מה שאתה שולח לשרת נשאר זהה.",
   "sunrise.pvp.combat_indicator": "מחוון התקפה ב-Legacy",
   "sunrise.pvp.combat_indicator.tooltip": "משאיר את מחוון ההתקפה ב-Legacy, של-1.8.9 לא היה.",
-  "sunrise.pvp.combat_rules": "קרב 1.8 בעולמות שאתה מארח",
-  "sunrise.pvp.combat_rules.tooltip": "שחקן יחיד והעולמות שאתה פותח ל-LAN נלחמים לפי חוקי 1.8.9: בלי התקררות התקפה או סיחוף, נזק נשק של 1.8, כוח, חדות ופגיעות קריטיות. השרתים שאתה מצטרף אליהם שומרים על החוקים שלהם.",
   "sunrise.pvp.combat_sounds": "צלילי פגיעה של 1.8",
   "sunrise.pvp.combat_sounds.tooltip": "ב-Legacy, משמיט את צלילי ההתקפה ש-1.9 הוסיף (חזק, חלש, סוחף, קריטי...). צלילי הפציעה נשארים.",
   "sunrise.pvp.corner.bottom_left": "למטה משמאל",

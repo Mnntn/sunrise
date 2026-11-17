@@ -840,8 +840,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy draws fights as 1.8.9 did: the item in your hand, its swing, eating, the bow and a sword held up while you hold use, without the dip after each hit or the attack indicator. Only the look: what you send a server stays the same.",
   "sunrise.pvp.combat_indicator": "Attack indicator in Legacy",
   "sunrise.pvp.combat_indicator.tooltip": "Keeps the attack indicator under Legacy, which 1.8.9 didn't have.",
-  "sunrise.pvp.combat_rules": "1.8 combat in worlds you host",
-  "sunrise.pvp.combat_rules.tooltip": "Single player and the worlds you open to LAN fight by 1.8.9's rules: no attack cooldown or sweep, 1.8 weapon damage, Strength, Sharpness and critical hits. Servers you join keep their own rules.",
   "sunrise.pvp.combat_sounds": "1.8 hit sounds",
   "sunrise.pvp.combat_sounds.tooltip": "Under Legacy, leaves out the attack sounds 1.9 added (strong, weak, sweep, critical...). Hurt sounds stay.",
   "sunrise.pvp.corner.bottom_left": "Bottom left",

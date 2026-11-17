@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy rysuje walki jak 1.8.9: przedmiot w rynce, jego machniyńcie, jedzynie, łuk i miecz podniesiōny, kej trzimasz użycie, bez ôpadańio po kożdym trafiyńciu i bez wskoźnika ataku. Ino wyglōnd: to, co wysyłasz serwerowi, ôstowo take same.",
   "sunrise.pvp.combat_indicator": "Wskoźnik ataku w Legacy",
   "sunrise.pvp.combat_indicator.tooltip": "Trzymo wskoźnik ataku pod Legacy, kerego 1.8.9 niy mioł.",
-  "sunrise.pvp.combat_rules": "Walka 1.8 w światach, kere hostujesz",
-  "sunrise.pvp.combat_rules.tooltip": "Jednogracz i światy, kere ôtwiyrosz na LAN, walczōm podle prawideł 1.8.9: bez ôchłodzynio ataku i ômiotynio, szkody broni 1.8, Siła, Ôstrość i trafiyńcia krytyczne. Serwery, do kerych sie prziłōnczosz, trzymajōm swoje prawidła.",
   "sunrise.pvp.combat_sounds": "Źwiynki trafiyń 1.8",
   "sunrise.pvp.combat_sounds.tooltip": "Pod Legacy pomijo źwiynki ataku, kere dodało 1.9 (mocny, słaby, ômiotajōncy, krytyczny...). Źwiynki raniynio ôstawajōm.",
   "sunrise.pvp.corner.bottom_left": "Dolny lewy",

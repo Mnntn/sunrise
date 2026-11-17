@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy piešia kovas kaip 1.8.9: daiktą rankoje, jo mostą, valgymą, lanką ir pakeltą kardą laikant naudojimą, be nusileidimo po kiekvieno smūgio ir be atakos indikatoriaus. Tik išvaizda: tai, ką siunčiate serveriui, nesikeičia.",
   "sunrise.pvp.combat_indicator": "Atakos indikatorius Legacy",
   "sunrise.pvp.combat_indicator.tooltip": "Palieka atakos indikatorių Legacy režime, kurio 1.8.9 neturėjo.",
-  "sunrise.pvp.combat_rules": "1.8 kova jūsų valdomuose pasauliuose",
-  "sunrise.pvp.combat_rules.tooltip": "Vieno žaidėjo ir LAN atidarytuose pasauliuose kovojama pagal 1.8.9 taisykles: nėra atakos atšalimo ar šlavimo, 1.8 ginklų žala, Jėga, Aštrumas ir kritiniai smūgiai. Serveriai, prie kurių prisijungiate, laikosi savo taisyklių.",
   "sunrise.pvp.combat_sounds": "1.8 smūgių garsai",
   "sunrise.pvp.combat_sounds.tooltip": "Legacy režime praleidžia 1.9 pridėtus atakos garsus (stiprus, silpnas, šluojantis, kritinis...). Sužalojimo garsai lieka.",
   "sunrise.pvp.corner.bottom_left": "Apačioje kairėje",

@@ -73,8 +73,8 @@ PRELUDE = 10
 # Client ticks between a reset's last teleport and the scenario: the player lands and stands still.
 SETTLE = 40
 # The Legacy client's sunrise-extras.txt (crates/sunrise-client-render/src/pvp.rs): the 1.8.9 feel, its
-# indicator and sounds, and the 1.8 rules, which only a world the player hosts may use.
-LEGACY_EXTRAS = 'combatFeel:legacy\ncombatIndicator:true\ncombatSounds:true\ncombatRules:true\n'
+# indicator and sounds.
+LEGACY_EXTRAS = 'combatFeel:legacy\ncombatIndicator:true\ncombatSounds:true\n'
 # The clients --clients may name: the first is the reference, the second must send what it sends.
 CLIENTS = {'vanilla': 'vanilla', 'sunrise': 'Sunrise', 'sunrise-legacy': 'Sunrise Legacy'}
 

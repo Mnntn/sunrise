@@ -43,7 +43,10 @@ mod tests {
             adopt_installed: false,
         };
         assert_eq!(parse("").unwrap(), default);
-        assert_eq!(parse("[combat]\nlegacy = true\n").unwrap(), default);
+        assert_eq!(
+            parse("[entities]\nvillager_lobotomize = true\n").unwrap(),
+            default
+        );
         assert_eq!(parse("[biome_regions]\n").unwrap(), default);
         assert_eq!(
             parse("[biome_regions]\nmissing = \"vanilla\"\nadopt_installed = true\n").unwrap(),

@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "레거시는 1.8.9처럼 전투를 표현합니다: 손에 든 아이템, 휘두름, 먹기, 활, 사용을 누르고 있을 때 세운 검, 타격 후 움찔거림과 공격 표시기가 없습니다. 겉모습만 바뀌며 서버로 보내는 내용은 동일합니다.",
   "sunrise.pvp.combat_indicator": "레거시에서 공격 표시기",
   "sunrise.pvp.combat_indicator.tooltip": "레거시에서도 1.8.9에 없던 공격 표시기를 유지합니다.",
-  "sunrise.pvp.combat_rules": "내가 호스트하는 월드에서 1.8 전투",
-  "sunrise.pvp.combat_rules.tooltip": "싱글 플레이어와 LAN으로 여는 월드가 1.8.9 규칙으로 싸웁니다: 공격 재사용 대기시간과 휩쓸기 없음, 1.8 무기 대미지, 힘, 날카로움, 치명타를 사용합니다. 참가한 서버는 자체 규칙을 유지합니다.",
   "sunrise.pvp.combat_sounds": "1.8 타격 소리",
   "sunrise.pvp.combat_sounds.tooltip": "레거시에서 1.9에 추가된 공격 소리(강타, 약타, 휩쓸기, 치명타...)를 생략합니다. 피격 소리는 유지됩니다.",
   "sunrise.pvp.corner.bottom_left": "왼쪽 아래",

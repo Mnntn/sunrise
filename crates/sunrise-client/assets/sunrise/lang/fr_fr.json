@@ -679,8 +679,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy dessine les combats comme en 1.8.9 : l'objet en main, son balancement, le fait de manger, l'arc et une épée levée tant que vous maintenez l'utilisation, sans la plongée après chaque coup ni l'indicateur d'attaque. Seulement l'apparence : ce que vous envoyez à un serveur reste pareil.",
   "sunrise.pvp.combat_indicator": "Indicateur d'attaque en Legacy",
   "sunrise.pvp.combat_indicator.tooltip": "Garde l'indicateur d'attaque sous Legacy, que 1.8.9 n'avait pas.",
-  "sunrise.pvp.combat_rules": "Combat 1.8 dans les mondes que vous hébergez",
-  "sunrise.pvp.combat_rules.tooltip": "Le solo et les mondes que vous ouvrez en LAN se battent selon les règles de 1.8.9 : pas de temps de recharge d'attaque ni de balayage, dégâts d'arme de 1.8, Force, Tranchant et coups critiques. Les serveurs que vous rejoignez gardent leurs propres règles.",
   "sunrise.pvp.combat_sounds": "Sons de coup de 1.8",
   "sunrise.pvp.combat_sounds.tooltip": "Sous Legacy, omet les sons d'attaque ajoutés en 1.9 (fort, faible, balayage, critique...). Les sons de blessure restent.",
   "sunrise.pvp.corner.bottom_left": "En bas à gauche",

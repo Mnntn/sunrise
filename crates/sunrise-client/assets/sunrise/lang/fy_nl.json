@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy tekenet gefjochten lykas 1.8.9 die: it item yn jo hân, syn swaai, ite, de bôge en in swurd omheech holden wylst jo brûke ynhâlde, sûnder de dûk nei elke reitsje of it oanfal-yndikator. Allinnich it uterlik: wat jo nei in tsjinner stjoere bliuwt itselde.",
   "sunrise.pvp.combat_indicator": "Oanfal-yndikator yn Legacy",
   "sunrise.pvp.combat_indicator.tooltip": "Hâldt it oanfal-yndikator ûnder Legacy, dat 1.8.9 net hie.",
-  "sunrise.pvp.combat_rules": "1.8-gefjocht yn wrâlden dy't jo hoste",
-  "sunrise.pvp.combat_rules.tooltip": "Singleplayer en de wrâlden dy't jo op LAN iepenje fjochtsje neffens de regels fan 1.8.9: gjin oanfal-ôfkuolling of sweep, skea fan wapens fan 1.8, Strength, Sharpness en krityske reitsjes. Tsjinners dêr't jo oan meidogge hâlde har eigen regels.",
   "sunrise.pvp.combat_sounds": "Reitslûden fan 1.8",
   "sunrise.pvp.combat_sounds.tooltip": "Under Legacy lit it de oanfallûden wei dy't 1.9 tafoege (sterk, swak, sweep, kritysk...). Pynlûden bliuwe.",
   "sunrise.pvp.corner.bottom_left": "Lofts ûnder",

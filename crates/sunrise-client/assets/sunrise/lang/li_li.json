@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy teikent gevechte wie 1.8.9: ‘t veurwerp in dien hand, zien zwaai, aete, de boog en e sjwaard omhoog es se gebruuk inhèls, zoonder de duik nao edere rake of de aanvalsindicator. Allein ‘t uterlik: wat se nao un server sjiks blief ‘t zelfde.",
   "sunrise.pvp.combat_indicator": "Aanvalsindicator in Legacy",
   "sunrise.pvp.combat_indicator.tooltip": "Hilt de aanvalsindicator oonder Legacy, die 1.8.9 neet had.",
-  "sunrise.pvp.combat_rules": "1.8-gevech in werelde die se host",
-  "sunrise.pvp.combat_rules.tooltip": "Einspeler en de werelde die se veur LAN ope zètte vechte volgens de regels vaan 1.8.9: gein aanvalscooldown of zwaai, 1.8-waopesjaoj, Krach, Sjerpte en kritische rake. Servers boe se aonsluts hawwe hun eige regels.",
   "sunrise.pvp.combat_sounds": "1.8-raakgeluide",
   "sunrise.pvp.combat_sounds.tooltip": "Oonder Legacy weure de aanvalsgeluide die 1.9 toeveugde eweg gelaote (sterk, zwak, zwaai, kritisch...). Pien-geluide blieve.",
   "sunrise.pvp.corner.bottom_left": "Links oonder",

@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy desegnas batalojn kiel 1.8.9: la objekton en via mano, ĝian svingon, manĝadon, la pafarkon kaj glavon tenatan supren dum vi tenas uzon, sen la kliniĝo post ĉiu trafo aŭ la ataka indikilo. Nur la aspekto: tio, kion vi sendas al servilo, restas la sama.",
   "sunrise.pvp.combat_indicator": "Ataka indikilo en Legacy",
   "sunrise.pvp.combat_indicator.tooltip": "Konservas la atakan indikilon sub Legacy, kiun 1.8.9 ne havis.",
-  "sunrise.pvp.combat_rules": "1.8-batalo en mondoj, kiujn vi gastigas",
-  "sunrise.pvp.combat_rules.tooltip": "Unuludanto kaj la mondoj, kiujn vi malfermas al LAN, batalas laŭ la reguloj de 1.8.9: neniu ataka malvarmiĝo aŭ balaaĵo, 1.8-armila damaĝo, Forteco, Akreco kaj kritikaj trafoj. Serviloj, al kiuj vi aliĝas, tenas siajn proprajn regulojn.",
   "sunrise.pvp.combat_sounds": "1.8-trafsontoj",
   "sunrise.pvp.combat_sounds.tooltip": "Sub Legacy, forlasas la atakajn sonojn, kiujn 1.9 aldonis (forta, malforta, balaa, kritika...). Vundsontoj restas.",
   "sunrise.pvp.corner.bottom_left": "Malsupre maldekstre",

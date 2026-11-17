@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy riše boje kot 1.8.9: predmet v roki, njegov zamah, jedenje, lok in meč, dvignjen med držanjem uporabe, brez spusta po vsakem zadetku in brez indikatorja napada. Samo videz: kar pošljete strežniku, ostane enako.",
   "sunrise.pvp.combat_indicator": "Indikator napada v Legacy",
   "sunrise.pvp.combat_indicator.tooltip": "Ohrani indikator napada pod Legacy, ki ga 1.8.9 ni imel.",
-  "sunrise.pvp.combat_rules": "Bojevanje 1.8 v svetovih, ki jih gostite",
-  "sunrise.pvp.combat_rules.tooltip": "Igra za enega igralca in svetovi, ki jih odprete v LAN-u, se bojujejo po pravilih 1.8.9: brez ohladitve napada ali zamaha, poškodbe orožja 1.8, moč, ostrost in kritični zadetki. Strežniki, ki se jim pridružite, obdržijo svoja pravila.",
   "sunrise.pvp.combat_sounds": "Zvoki zadetkov 1.8",
   "sunrise.pvp.combat_sounds.tooltip": "Pod Legacy izpusti zvoke napada, ki jih je dodal 1.9 (močan, šibek, zamah, kritični ...). Zvoki poškodb ostanejo.",
   "sunrise.pvp.corner.bottom_left": "Spodaj levo",

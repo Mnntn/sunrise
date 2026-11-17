@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy piirtää taistelut kuten 1.8.9: kädessäsi oleva esine, sen heilautus, syöminen, jousi ja miekka nostettuna, kun pidät käyttöä painettuna, ilman osuman jälkeistä notkahdusta tai hyökkäysilmaisinta. Vain ulkonäkö: se, mitä lähetät palvelimelle, pysyy samana.",
   "sunrise.pvp.combat_indicator": "Hyökkäysilmaisin Legacyssa",
   "sunrise.pvp.combat_indicator.tooltip": "Pitää hyökkäysilmaisimen käytössä Legacyssa, jossa 1.8.9:ssä sitä ei ollut.",
-  "sunrise.pvp.combat_rules": "1.8:n taistelu isännöimissäsi maailmoissa",
-  "sunrise.pvp.combat_rules.tooltip": "Yksinpeli ja lähiverkkoon avaamasi maailmat taistelevat 1.8.9:n säännöillä: ei hyökkäyksen jäähtymistä tai pyyhkäisyä, 1.8:n asevahinko, Voima, Terävyys ja kriittiset osumat. Palvelimilla, joille liityt, säilyvät niiden omat säännöt.",
   "sunrise.pvp.combat_sounds": "1.8:n osumaäänet",
   "sunrise.pvp.combat_sounds.tooltip": "Legacyssa jättää pois 1.9:n lisäämät hyökkäysäänet (vahva, heikko, pyyhkäisy, kriittinen...). Vahingoittumisäänet säilyvät.",
   "sunrise.pvp.corner.bottom_left": "Alhaalla vasemmalla",

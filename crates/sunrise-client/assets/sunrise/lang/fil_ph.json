@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Iginuguhit ng Legacy ang mga labanan tulad ng 1.8.9: ang item sa kamay mo, ang paghampas nito, pagkain, ang pana at espadang nakataas habang hinahawakan ang use, nang walang paglubog pagkatapos ng bawat tama o attack indicator. Hitsura lang: pareho pa rin ang ipinapadala mo sa server.",
   "sunrise.pvp.combat_indicator": "Attack indicator sa Legacy",
   "sunrise.pvp.combat_indicator.tooltip": "Pinapanatili ang attack indicator sa ilalim ng Legacy, na wala sa 1.8.9.",
-  "sunrise.pvp.combat_rules": "1.8 na labanan sa mga mundong ikaw ang host",
-  "sunrise.pvp.combat_rules.tooltip": "Ang single player at ang mga mundong binubuksan mo sa LAN ay lumalaban ayon sa mga patakaran ng 1.8.9: walang attack cooldown o sweep, damage ng sandata ng 1.8, Strength, Sharpness at critical hit. Ang mga server na sinalihan mo ay may sariling patakaran.",
   "sunrise.pvp.combat_sounds": "Mga tunog ng tamaan sa 1.8",
   "sunrise.pvp.combat_sounds.tooltip": "Sa ilalim ng Legacy, inaalis ang mga tunog ng pag-atake na idinagdag ng 1.9 (malakas, mahina, sweep, critical...). Nananatili ang mga tunog ng pagsakit.",
   "sunrise.pvp.corner.bottom_left": "Ibaba kaliwa",

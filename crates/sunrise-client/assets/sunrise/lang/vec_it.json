@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy el tira i scontri come che el fazeva 1.8.9: l'ogeto in man, el so colpo, el magnar, l'arco e na spada alsà mentre che te tegni dopara, sensa ła basa dopo ogni colpo o l'indicador de ataco. Soło l'aspeto: queło che te mandi a un server el resta isteso.",
   "sunrise.pvp.combat_indicator": "Indicador de ataco in Legacy",
   "sunrise.pvp.combat_indicator.tooltip": "El tien l'indicador de ataco soto Legacy, che 1.8.9 no'l gaveva.",
-  "sunrise.pvp.combat_rules": "Conbatimento 1.8 nei mondi che te òspiti",
-  "sunrise.pvp.combat_rules.tooltip": "El singoło xogador e i mondi che te verzi in LAN i conbate co łe règole de 1.8.9: sensa recarga de l'ataco o scope, dano de łe arme de 1.8, Forza, Afilateza e colpi critici. I server indove che te entri i tien łe so règole.",
   "sunrise.pvp.combat_sounds": "Suoni dei colpi de 1.8",
   "sunrise.pvp.combat_sounds.tooltip": "Soto Legacy, el łasa fora i suoni de ataco che 1.9 el ga zontà (forte, debole, scope, critico...). I suoni de ferimento i resta.",
   "sunrise.pvp.corner.bottom_left": "In baso a sanca",

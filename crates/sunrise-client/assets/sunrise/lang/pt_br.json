@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "O Legado desenha as lutas como a 1.8.9: o item na sua mão, seu balanço, comer, o arco e uma espada erguida enquanto você segura o uso, sem a descida após cada golpe nem o indicador de ataque. Apenas a aparência: o que você envia a um servidor continua igual.",
   "sunrise.pvp.combat_indicator": "Indicador de ataque no Legado",
   "sunrise.pvp.combat_indicator.tooltip": "Mantém o indicador de ataque no Legado, que a 1.8.9 não tinha.",
-  "sunrise.pvp.combat_rules": "Combate da 1.8 nos mundos que você hospeda",
-  "sunrise.pvp.combat_rules.tooltip": "O modo um jogador e os mundos que você abre para a LAN lutam pelas regras da 1.8.9: sem recarga de ataque nem varredura, dano de arma da 1.8, Força, Afiação e acertos críticos. Os servidores em que você entra mantêm as próprias regras.",
   "sunrise.pvp.combat_sounds": "Sons de acerto da 1.8",
   "sunrise.pvp.combat_sounds.tooltip": "No Legado, deixa de fora os sons de ataque que a 1.9 adicionou (forte, fraco, varredura, crítico...). Os sons de dano permanecem.",
   "sunrise.pvp.corner.bottom_left": "Inferior esquerdo",

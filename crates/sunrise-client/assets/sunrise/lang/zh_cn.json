@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "“旧版”按 1.8.9 的方式绘制战斗：手中的物品、挥动、进食、弓，以及按住使用键时举起的剑，没有每次攻击后的下沉，也没有攻击指示器。仅影响外观：发送给服务器的内容不变。",
   "sunrise.pvp.combat_indicator": "旧版中的攻击指示器",
   "sunrise.pvp.combat_indicator.tooltip": "在“旧版”下保留攻击指示器，1.8.9 本来没有。",
-  "sunrise.pvp.combat_rules": "你主持的世界使用 1.8 战斗规则",
-  "sunrise.pvp.combat_rules.tooltip": "单人和你开放到局域网的世界按 1.8.9 的规则战斗：没有攻击冷却或横扫，1.8 武器伤害、力量、锋利和暴击。你加入的服务器保留其自身规则。",
   "sunrise.pvp.combat_sounds": "1.8 命中音效",
   "sunrise.pvp.combat_sounds.tooltip": "在“旧版”下省略 1.9 新增的攻击音效（重击、轻击、横扫、暴击……）。受伤音效保留。",
   "sunrise.pvp.corner.bottom_left": "左下",

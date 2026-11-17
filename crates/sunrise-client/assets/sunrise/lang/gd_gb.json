@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Tha Legacy a' tarraing sabaidean mar a rinn 1.8.9: an nì nad làimh, a shìneadh, ithe, am bogha agus claidheamh air a thogail fhad 's a chumas tu cleachdadh, gun a' bhogadh às deidh gach buille no an comharra ionnsaigh. An coltas a-mhàin: tha na chuireas tu gu frithealaiche a' fuireach mar a tha.",
   "sunrise.pvp.combat_indicator": "Comharra ionnsaigh ann an Legacy",
   "sunrise.pvp.combat_indicator.tooltip": "A' cumail a' chomharra ionnsaigh fo Legacy, rud nach robh aig 1.8.9.",
-  "sunrise.pvp.combat_rules": "Comhstri 1.8 anns na saoghal a dh'fhosglas tu",
-  "sunrise.pvp.combat_rules.tooltip": "Bidh aon-chluicheadair agus na saoghal a dh'fhosglas tu gu LAN a' sabaid a rèir riaghailtean 1.8.9: gun fhuachd ionnsaigh no sguab, milleadh armachd 1.8, Strength, Sharpness agus buillean critigeach. Cumaidh frithealaichean a thèid thu a-steach orra an riaghailtean fhèin.",
   "sunrise.pvp.combat_sounds": "Fuaimean buailte 1.8",
   "sunrise.pvp.combat_sounds.tooltip": "Fo Legacy, a' fàgail a-mach na fuaimean ionnsaigh a chuir 1.9 ris (làidir, lag, sguab, critigeach...). Tha fuaimean goirt a' fuireach.",
   "sunrise.pvp.corner.bottom_left": "Gu h-ìosal air an làimh chlì",

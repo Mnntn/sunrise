@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy teiknar bardaga eins og 1.8.9 gerði: hluturinn í hendi þér, sveiflan hans, að borða, boginn og sverð sem haldið er uppi meðan þú heldur notkun, án dýfingarinnar eftir hvert högg eða árásarvísisins. Aðeins útlitið: það sem þú sendir netþjóni er það sama.",
   "sunrise.pvp.combat_indicator": "Árásarvísir í Legacy",
   "sunrise.pvp.combat_indicator.tooltip": "Heldur árásarvísinum undir Legacy, sem 1.8.9 hafði ekki.",
-  "sunrise.pvp.combat_rules": "1.8 bardagi í heimum sem þú hýsir",
-  "sunrise.pvp.combat_rules.tooltip": "Einleikur og heimarnir sem þú opnar á LAN berjast eftir reglum 1.8.9: engin árásarniðurkólnun eða sveif, skaði vopna 1.8, Strength, Sharpness og gagnrýnin högg. Netþjónar sem þú tengist halda sínum eigin reglum.",
   "sunrise.pvp.combat_sounds": "Hljóð 1.8-högga",
   "sunrise.pvp.combat_sounds.tooltip": "Undir Legacy sleppir áráshljóðunum sem 1.9 bætti við (sterk, veik, sveif, gagnrýnin...). Meiðslahljóð haldast.",
   "sunrise.pvp.corner.bottom_left": "Neðst til vinstri",

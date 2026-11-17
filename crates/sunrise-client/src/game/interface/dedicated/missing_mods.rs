@@ -110,7 +110,7 @@ mod tests {
     fn missing_mods_refuse_unless_allowed() {
         assert_eq!(parse("").unwrap(), Settings { allow: false });
         assert_eq!(
-            parse("[combat]\nlegacy = true\n").unwrap(),
+            parse("[entities]\nvillager_lobotomize = true\n").unwrap(),
             Settings { allow: false }
         );
         assert_eq!(

@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy na-ese ọgụ dịka 1.8.9 si eme: ihe dị n'aka gị, ọkụ ya, iri nri, ụta na mma agha ewelitere mgbe i jidere use, na-enweghị mgbada mgbe ọkụ ọ bụla gasịrị ma ọ bụ ihe ngosi ịwakpo. Naanị anya: ihe i na-eziga sava na-anọgide otu.",
   "sunrise.pvp.combat_indicator": "Ihe ngosi ịwakpo na Legacy",
   "sunrise.pvp.combat_indicator.tooltip": "Na-edebe ihe ngosi ịwakpo n'okpuru Legacy, nke 1.8.9 enweghị.",
-  "sunrise.pvp.combat_rules": "Ọgụ 1.8 n'ụwa ị na-akwado",
-  "sunrise.pvp.combat_rules.tooltip": "Otu onye na ụwa ị mepere na LAN na-alụ ọgụ n'iwu 1.8.9: enweghị attack cooldown ma ọ bụ sweep, mmebi ngwa agha 1.8, Strength, Sharpness na ọkụ critical. Sava ị jikọtara na-edebe iwu ha.",
   "sunrise.pvp.combat_sounds": "Ụda ọkụ 1.8",
   "sunrise.pvp.combat_sounds.tooltip": "N'okpuru Legacy, na-ahapụ ụda ọkụ 1.9 gbakwunyere (ike, adịghị ike, sweep, critical...). Ụda mmerụ ahụ na-anọgide.",
   "sunrise.pvp.corner.bottom_left": "Ala aka ekpe",

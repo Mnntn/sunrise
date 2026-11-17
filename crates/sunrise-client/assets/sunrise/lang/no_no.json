@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy tegner kamper som 1.8.9 gjorde: gjenstanden i hånden, svingen, spisingen, buen og et sverd holdt oppe mens du holder bruk, uten nikket etter hvert treff eller angrepsindikatoren. Bare utseendet: det du sender til en server forblir det samme.",
   "sunrise.pvp.combat_indicator": "Angrepsindikator i Legacy",
   "sunrise.pvp.combat_indicator.tooltip": "Beholder angrepsindikatoren under Legacy, som 1.8.9 ikke hadde.",
-  "sunrise.pvp.combat_rules": "1.8-kamp i verdener du er vert for",
-  "sunrise.pvp.combat_rules.tooltip": "Enspiller og verdenene du åpner for LAN kjemper etter 1.8.9-reglene: ingen angrepsnedkjøling eller feiing, 1.8-våpenskade, styrke, skarphet og kritiske treff. Servere du blir med på beholder sine egne regler.",
   "sunrise.pvp.combat_sounds": "1.8-trefflyder",
   "sunrise.pvp.combat_sounds.tooltip": "Under Legacy utelates angrepslydene 1.9 la til (sterk, svak, feiende, kritisk ...). Skadelydene blir.",
   "sunrise.pvp.corner.bottom_left": "Nederst til venstre",

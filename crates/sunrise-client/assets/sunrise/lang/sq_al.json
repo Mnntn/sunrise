@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy i vizaton luftimet si në 1.8.9: sendi në dorën tënde, lëkundja e tij, ngrënia, harku dhe një shpatë e mbajtur lart ndërsa mban përdorimin, pa uljen pas çdo goditjeje ose treguesin e sulmit. Vetëm pamja: ajo që i dërgon një serveri mbetet e njëjtë.",
   "sunrise.pvp.combat_indicator": "Treguesi i sulmit në Legacy",
   "sunrise.pvp.combat_indicator.tooltip": "Mban treguesin e sulmit nën Legacy, të cilin 1.8.9 nuk e kishte.",
-  "sunrise.pvp.combat_rules": "Luftim 1.8 në botët që pret",
-  "sunrise.pvp.combat_rules.tooltip": "Një lojtar dhe botët që hap në LAN luftojnë me rregullat e 1.8.9: pa ftohje sulmi ose fshirje, dëmtim armësh 1.8, Forca, Mprehtësia dhe goditjet kritike. Serverët ku bashkohesh mbajnë rregullat e tyre.",
   "sunrise.pvp.combat_sounds": "Tingujt e goditjes 1.8",
   "sunrise.pvp.combat_sounds.tooltip": "Nën Legacy, lë jashtë tingujt e sulmit që shtoi 1.9 (i fortë, i dobët, fshirje, kritik...). Tingujt e lëndimit mbeten.",
   "sunrise.pvp.corner.bottom_left": "Poshtë majtas",

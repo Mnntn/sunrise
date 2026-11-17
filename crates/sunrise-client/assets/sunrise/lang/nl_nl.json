@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy tekent gevechten zoals 1.8.9: het item in je hand, de zwaai, eten, de boog en een zwaard dat omhoog wordt gehouden terwijl je gebruiken ingedrukt houdt, zonder de dip na elke treffer of de aanvalsindicator. Alleen het uiterlijk: wat je naar een server stuurt blijft hetzelfde.",
   "sunrise.pvp.combat_indicator": "Aanvalsindicator in Legacy",
   "sunrise.pvp.combat_indicator.tooltip": "Houdt de aanvalsindicator aan onder Legacy, die 1.8.9 niet had.",
-  "sunrise.pvp.combat_rules": "1.8-gevechten in werelden die je host",
-  "sunrise.pvp.combat_rules.tooltip": "Singleplayer en de werelden die je voor LAN opent, vechten volgens de regels van 1.8.9: geen aanvalsafkoeling of veeg, 1.8-wapenschade, Kracht, Scherpte en kritieke treffers. Servers waar je aan meedoet houden hun eigen regels.",
   "sunrise.pvp.combat_sounds": "1.8-treffergeluiden",
   "sunrise.pvp.combat_sounds.tooltip": "Laat onder Legacy de aanvalsgeluiden weg die 1.9 toevoegde (sterk, zwak, veeg, kritiek...). Geluiden bij pijn blijven.",
   "sunrise.pvp.corner.bottom_left": "Linksonder",

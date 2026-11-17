@@ -214,14 +214,6 @@ impl Game<'_> {
         let combat = self.settings.extras.pvp.combat;
         combat.legacy && !combat.indicator
     }
-    /// Legacy rules: the hits a server resolves follow 1.8.9 (`legacy_rules.rs`).
-    pub(in crate::game) fn pvp_legacy_rules(&self) -> bool {
-        self.settings.extras.pvp.combat.rules
-    }
-    /// The server's legacy rules, from server.toml or the window's options.
-    pub(in crate::game) fn set_pvp_legacy_rules(&mut self, on: bool) {
-        self.settings.extras.pvp.combat.rules = on;
-    }
     /// A sound Combat feel Legacy keeps quiet.
     pub(in crate::game) fn pvp_mutes_sound(&self, name: &str) -> bool {
         self.settings.extras.pvp.combat.mutes_sound(name)

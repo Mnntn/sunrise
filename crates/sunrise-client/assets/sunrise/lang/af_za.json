@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy teken gevegte soos 1.8.9 dit gedoen het: die item in jou hand, sy swaai, eet, die boog en 'n swaard wat opgehou word terwyl jy gebruik hou, sonder die dip ná elke treffer of die aanvalaanwyser. Net die voorkoms: wat jy na 'n bediener stuur bly dieselfde.",
   "sunrise.pvp.combat_indicator": "Aanvalaanwyser in Legacy",
   "sunrise.pvp.combat_indicator.tooltip": "Hou die aanvalaanwyser onder Legacy, wat 1.8.9 nie gehad het nie.",
-  "sunrise.pvp.combat_rules": "1.8-stryd in wêrelde wat jy aanbied",
-  "sunrise.pvp.combat_rules.tooltip": "Enkelspeler en die wêrelde wat jy op LAN oopmaak, veg volgens 1.8.9 se reëls: geen aanvalafkoeling of sweep nie, 1.8-wapenskade, Strength, Sharpness en kritiese treffers. Bedieners waarby jy aansluit, hou hul eie reëls.",
   "sunrise.pvp.combat_sounds": "1.8-trefferklanke",
   "sunrise.pvp.combat_sounds.tooltip": "Onder Legacy, laat die aanvalklanke uit wat 1.9 bygevoeg het (sterk, swak, sweep, krities...). Seerklanke bly.",
   "sunrise.pvp.corner.bottom_left": "Links onder",

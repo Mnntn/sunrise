@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy jiġbed il-ġlied kif kien jagħmel 1.8.9: l-oġġett f'idejk, it-tbandil tiegħu, l-ikel, il-qaws u xabla mżammuma 'l fuq waqt li żżomm il-użu, mingħajr it-tniżżila wara kull laqta jew l-indiċi tal-attakk. Biss id-dehra: dak li tibgħat lis-server jibqa' l-istess.",
   "sunrise.pvp.combat_indicator": "Indiċi tal-attakk f'Legacy",
   "sunrise.pvp.combat_indicator.tooltip": "Iżomm l-indiċi tal-attakk taħt Legacy, li 1.8.9 ma kellux.",
-  "sunrise.pvp.combat_rules": "Kombattiment tal-1.8 fid-dinjiet li torganizza",
-  "sunrise.pvp.combat_rules.tooltip": "Il-plejer wieħed u d-dinjiet li tiftaħ għal LAN jiġġieldu bir-regoli tal-1.8.9: l-ebda cooldown tal-attakk jew sweep, ħsara tal-armi tal-1.8, Strength, Sharpness u laqtiet kritiċi. Is-servers li tingħaqad magħhom iżommu r-regoli tagħhom.",
   "sunrise.pvp.combat_sounds": "Ħsejjes tal-laqta tal-1.8",
   "sunrise.pvp.combat_sounds.tooltip": "Taħt Legacy, iħalli barra l-ħsejjes tal-attakk li żied 1.9 (qawwi, dgħajjef, sweep, critical...). Il-ħsejjes tal-uġigħ jibqgħu.",
   "sunrise.pvp.corner.bottom_left": "Isfel ix-xellug",

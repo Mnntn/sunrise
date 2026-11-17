@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy janglarni 1.8.9 dagidek chizadi: qo'lingizdagi buyum, uning tebranishi, yeyish, kamon va foydalanishni ushlab turganda ko'tarilgan qilich, har zarbadan keyingi pasayishsiz va hujum indikatorisiz. Faqat ko'rinish: serverga yuborganingiz o'zgarmaydi.",
   "sunrise.pvp.combat_indicator": "Legacy da hujum indikatori",
   "sunrise.pvp.combat_indicator.tooltip": "Legacy da hujum indikatorini saqlaydi, 1.8.9 da u yo'q edi.",
-  "sunrise.pvp.combat_rules": "Siz boshqaradigan dunyolarda 1.8 jangi",
-  "sunrise.pvp.combat_rules.tooltip": "Yakkaxon o'yin va LANga ochgan dunyolaringiz 1.8.9 qoidalari bo'yicha jang qiladi: hujum sovishi va supurish yo'q, 1.8 qurol zarari, Strength, Sharpness va kritik zarbalar. Qo'shilgan serverlaringiz o'z qoidalarini saqlaydi.",
   "sunrise.pvp.combat_sounds": "1.8 urilish tovushlari",
   "sunrise.pvp.combat_sounds.tooltip": "Legacy da 1.9 qo'shgan hujum tovushlarini (kuchli, kuchsiz, supurish, kritik...) chiqarib tashlaydi. Jarohat tovushlari qoladi.",
   "sunrise.pvp.corner.bottom_left": "Chap past",

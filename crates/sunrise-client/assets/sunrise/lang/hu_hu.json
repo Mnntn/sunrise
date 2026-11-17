@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "A Legacy úgy rajzolja a harcokat, ahogy az 1.8.9 tette: a kézben lévő tárgy, annak lendítése, az evés, az íj, és egy kard felemelve, amíg a használatot nyomva tartja, a találatok utáni lehajlás és a támadásjelző nélkül. Csak a látvány: a szervernek küldött adat ugyanaz marad.",
   "sunrise.pvp.combat_indicator": "Támadásjelző Legacy módban",
   "sunrise.pvp.combat_indicator.tooltip": "Legacy alatt megtartja a támadásjelzőt, amely az 1.8.9-ben nem volt.",
-  "sunrise.pvp.combat_rules": "1.8-as harc az Ön által futtatott világokban",
-  "sunrise.pvp.combat_rules.tooltip": "Az egyjátékos és a LAN-ra megnyitott világok az 1.8.9 szabályai szerint harcolnak: nincs támadási lehűlés és söprés, 1.8-as fegyveres sebzés, Erő, Élesség és kritikus találatok. A csatlakozott szerverek a saját szabályaikat tartják.",
   "sunrise.pvp.combat_sounds": "1.8-as találathangok",
   "sunrise.pvp.combat_sounds.tooltip": "Legacy alatt kihagyja az 1.9-ben hozzáadott támadáshangokat (erős, gyenge, söprés, kritikus...). A sebződéshangok megmaradnak.",
   "sunrise.pvp.corner.bottom_left": "Bal alsó",

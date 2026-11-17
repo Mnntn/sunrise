@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy zeechent Kämpf wéi 1.8.9: den Objet an Ärer Hand, säi Schwong, Iessen, de Bou an e Schwert, dat Dir haalt, während Dir Benotzen dréckt, ouni den Dip no all Treffer oder den Attackindikator. Nëmmen d'Ausgesinn: wat Dir un de Server schéckt, bleift d'selwecht.",
   "sunrise.pvp.combat_indicator": "Attackindikator am Legacy",
   "sunrise.pvp.combat_indicator.tooltip": "Behält den Attackindikator ënner Legacy, deen 1.8.9 net hat.",
-  "sunrise.pvp.combat_rules": "Kampf no 1.8 an Welten, déi Dir host",
-  "sunrise.pvp.combat_rules.tooltip": "Eenzele-Spiller an d'Welt, déi Dir am LAN opmaacht, kämpfen no de Regele vun 1.8.9: keen Attack-Cooldown oder Sweep, 1.8-Waffeschued, Strength, Sharpness a kritesch Treffer. Serveren, deenen Dir bäitried, behalen hir eege Reegelen.",
   "sunrise.pvp.combat_sounds": "Treffertéin vun 1.8",
   "sunrise.pvp.combat_sounds.tooltip": "Ënner Legacy léisst en d'Attacktéin ewech, déi 1.9 dobäigesat huet (staark, schwaach, Sweep, kritesch...). Verwonnungstéin bleiwen.",
   "sunrise.pvp.corner.bottom_left": "Ënne lénks",

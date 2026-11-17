@@ -113,7 +113,6 @@ mod test_game_dir;
 pub use sunrise_core::json_nbt;
 pub mod lan;
 pub mod landing;
-pub mod legacy_combat;
 pub mod living_attributes;
 pub mod locator_bar;
 pub mod lod_net;

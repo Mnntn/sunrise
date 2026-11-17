@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy waxay dagaallada u sawirtaa sida 1.8.9: shayga gacantaada, lulantiisa, cunista, qaansada iyo seef kor loo qaaday inta aad haysato isticmaalka, iyada oo aan lahayn hoos-u-dhicidda garaac kasta ka dib ama tilmaamaha weerarka. Kaliya muuqaalka: waxa aad server-ka u dirto isku mid buu ahaanayaa.",
   "sunrise.pvp.combat_indicator": "Tilmaamaha weerarka Legacy",
   "sunrise.pvp.combat_indicator.tooltip": "Wuxuu hayaa tilmaamaha weerarka ee Legacy, oo 1.8.9 aan lahayn.",
-  "sunrise.pvp.combat_rules": "Dagaalka 1.8 adduunyada aad martigeliso",
-  "sunrise.pvp.combat_rules.tooltip": "Hal-ciyaartoy iyo adduunyada aad LAN u furto waxay u dagaallamaan xeerarka 1.8.9: ma jiro cooldown weerar ama xaaqid, dhaawaca hubka 1.8, Strength, Af-legeynta iyo garaacyada halista ah. Server-yada aad ku biirto waxay hayaan xeerarkooda.",
   "sunrise.pvp.combat_sounds": "Dhawaqa garaaca 1.8",
   "sunrise.pvp.combat_sounds.tooltip": "Legacy, waxay ka tagtaa dhawaqa weerarka ee 1.9 ku dartay (adag, tabar yar, xaaqid, halis...). Dhawaqa dhaawaca wuu sii jiraa.",
   "sunrise.pvp.corner.bottom_left": "Hoose bidix",

@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "El mode Clàssic dibuixa les lluites com ho feia la 1.8.9: l'objecte a la mà, el seu cop, menjar, l'arc i una espasa aixecada mentre mantens ús, sense la baixada després de cada cop ni l'indicador d'atac. Només l'aspecte: el que envies a un servidor no canvia.",
   "sunrise.pvp.combat_indicator": "Indicador d'atac al mode Clàssic",
   "sunrise.pvp.combat_indicator.tooltip": "Manté l'indicador d'atac al mode Clàssic, que la 1.8.9 no tenia.",
-  "sunrise.pvp.combat_rules": "Combat de la 1.8 als mons que hostatges",
-  "sunrise.pvp.combat_rules.tooltip": "El mode d'un jugador i els mons que obres a la LAN lluiten amb les regles de la 1.8.9: sense temps de reutilització d'atac ni escombrat, mal d'arma de la 1.8, Força, Afilat i cops crítics. Els servidors on t'uneixes mantenen les seves pròpies regles.",
   "sunrise.pvp.combat_sounds": "Sons de cop de la 1.8",
   "sunrise.pvp.combat_sounds.tooltip": "Al mode Clàssic, omet els sons d'atac que va afegir la 1.9 (fort, feble, escombrat, crític...). Els sons de ferit es mantenen.",
   "sunrise.pvp.corner.bottom_left": "A baix a l'esquerra",

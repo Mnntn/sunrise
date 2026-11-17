@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy tegner kampe, som 1.8.9 gjorde: genstanden i din hånd, dens sving, spisning, buen og et sværd løftet, mens du holder brug, uden dykket efter hvert slag eller angrebsindikatoren. Kun udseendet: det, du sender til en server, forbliver det samme.",
   "sunrise.pvp.combat_indicator": "Angrebsindikator i Legacy",
   "sunrise.pvp.combat_indicator.tooltip": "Beholder angrebsindikatoren under Legacy, som 1.8.9 ikke havde.",
-  "sunrise.pvp.combat_rules": "1.8-kamp i verdener, du hoster",
-  "sunrise.pvp.combat_rules.tooltip": "Enspiller og de verdener, du åbner for LAN, kæmper efter 1.8.9's regler: ingen angrebs-cooldown eller sweep, 1.8-våbenskade, Styrke, Skarphed og kritiske slag. Servere, du deltager i, beholder deres egne regler.",
   "sunrise.pvp.combat_sounds": "1.8-rammelyde",
   "sunrise.pvp.combat_sounds.tooltip": "Under Legacy udelades de angrebslyde, 1.9 tilføjede (stærk, svag, sweep, kritisk...). Skadelyde bevares.",
   "sunrise.pvp.corner.bottom_left": "Nederst til venstre",

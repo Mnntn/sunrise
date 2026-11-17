@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Tarraingíonn Legacy comhrac mar a rinne 1.8.9: an mhír i do láimh, a luascadh, ag ithe, an bogha agus claíomh ardaithe agus tú ag coinneáil úsáide, gan an tumadh tar éis gach buille ná an táscaire ionsaithe. An chuma amháin: fanann an méid a sheolann tú chuig freastalaí mar an gcéanna.",
   "sunrise.pvp.combat_indicator": "Táscaire ionsaithe i Legacy",
   "sunrise.pvp.combat_indicator.tooltip": "Coinníonn sé an táscaire ionsaithe faoi Legacy, rud nach raibh ag 1.8.9.",
-  "sunrise.pvp.combat_rules": "Comhrac 1.8 i ndomhain a óstálann tú",
-  "sunrise.pvp.combat_rules.tooltip": "Imríonn aon-imreoir agus na domhain a osclaíonn tú do LAN de réir rialacha 1.8.9: gan fuarú ionsaithe ná scuabadh, damáiste arm 1.8, Neart, Géire agus buillí criticiúla. Coinníonn freastalaithe a dtéann tú isteach iontu a rialacha féin.",
   "sunrise.pvp.combat_sounds": "Fuaimeanna buailte 1.8",
   "sunrise.pvp.combat_sounds.tooltip": "Faoi Legacy, fágann sé amach na fuaimeanna ionsaithe a chuir 1.9 leis (láidir, lag, scuabadh, criticiúil...). Fanann fuaimeanna gortaithe.",
   "sunrise.pvp.corner.bottom_left": "Bun clé",

@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy melukis pertarungan seperti 1.8.9: item di tangan anda, hayunannya, makan, busur dan pedang yang diangkat semasa anda menahan guna, tanpa penurunan selepas setiap hentaman atau penunjuk serangan. Rupa sahaja: apa yang anda hantar ke pelayan kekal sama.",
   "sunrise.pvp.combat_indicator": "Penunjuk serangan dalam Legacy",
   "sunrise.pvp.combat_indicator.tooltip": "Mengekalkan penunjuk serangan di bawah Legacy, yang tidak ada pada 1.8.9.",
-  "sunrise.pvp.combat_rules": "Pertempuran 1.8 dalam dunia yang anda hoskan",
-  "sunrise.pvp.combat_rules.tooltip": "Pemain tunggal dan dunia yang anda buka ke LAN bertarung mengikut peraturan 1.8.9: tiada cooldown serangan atau sapuan, kerosakan senjata 1.8, Kekuatan, Ketajaman dan hentaman kritikal. Pelayan yang anda sertai mengekalkan peraturan mereka sendiri.",
   "sunrise.pvp.combat_sounds": "Bunyi hentaman 1.8",
   "sunrise.pvp.combat_sounds.tooltip": "Di bawah Legacy, meninggalkan bunyi serangan yang ditambah 1.9 (kuat, lemah, sapuan, kritikal...). Bunyi cedera kekal.",
   "sunrise.pvp.corner.bottom_left": "Kiri bawah",

@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy zīmē cīņas kā 1.8.9: priekšmetu rokā, tā vēzienu, ēšanu, loku un zobenu paceltu, kamēr turat lietošanu, bez noliekšanās pēc katra sitiena un bez uzbrukuma indikatora. Tikai izskats: tas, ko sūtāt serverim, paliek nemainīgs.",
   "sunrise.pvp.combat_indicator": "Uzbrukuma indikators Legacy režīmā",
   "sunrise.pvp.combat_indicator.tooltip": "Patur uzbrukuma indikatoru Legacy režīmā, kāds 1.8.9 nebija.",
-  "sunrise.pvp.combat_rules": "1.8 kauja jūsu mitinātajās pasaulēs",
-  "sunrise.pvp.combat_rules.tooltip": "Vienspēlētāja un jūsu LAN atvērtās pasaules cīnās pēc 1.8.9 noteikumiem: nav uzbrukuma atdzišanas vai vēziena, 1.8 ieroču bojājumi, Spēks, Asums un kritiskie sitieni. Serveri, kuriem pievienojaties, patur savus noteikumus.",
   "sunrise.pvp.combat_sounds": "1.8 sitienu skaņas",
   "sunrise.pvp.combat_sounds.tooltip": "Legacy režīmā izlaiž uzbrukuma skaņas, ko pievienoja 1.9 (spēcīgs, vājš, vēziens, kritiskais...). Ievainojuma skaņas paliek.",
   "sunrise.pvp.corner.bottom_left": "Apakšā pa kreisi",

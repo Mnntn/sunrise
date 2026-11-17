@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Kiểu cũ vẽ trận đánh như 1.8.9: vật phẩm trên tay, động tác vung, ăn uống, cung và kiếm giơ lên khi giữ phím dùng, không có cú hạ sau mỗi đòn hay chỉ báo tấn công. Chỉ là hình thức: những gì bạn gửi máy chủ vẫn như cũ.",
   "sunrise.pvp.combat_indicator": "Chỉ báo tấn công ở Kiểu cũ",
   "sunrise.pvp.combat_indicator.tooltip": "Giữ chỉ báo tấn công ở Kiểu cũ, thứ mà 1.8.9 không có.",
-  "sunrise.pvp.combat_rules": "Chiến đấu 1.8 trong thế giới bạn làm chủ",
-  "sunrise.pvp.combat_rules.tooltip": "Chơi đơn và các thế giới bạn mở qua LAN đánh theo luật 1.8.9: không có thời gian hồi đòn hay quét, sát thương vũ khí, Sức mạnh, Sắc bén và đòn chí mạng kiểu 1.8. Máy chủ bạn tham gia vẫn giữ luật riêng.",
   "sunrise.pvp.combat_sounds": "Âm thanh trúng đòn 1.8",
   "sunrise.pvp.combat_sounds.tooltip": "Ở Kiểu cũ, bỏ các âm thanh tấn công mà 1.9 thêm vào (mạnh, yếu, quét, chí mạng...). Âm thanh bị thương vẫn giữ.",
   "sunrise.pvp.corner.bottom_left": "Dưới trái",

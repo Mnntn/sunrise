@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy desenează luptele ca în 1.8.9: obiectul din mână, lovitura lui, mâncatul, arcul și o sabie ridicată cât ții apăsată folosirea, fără coborârea după fiecare lovitură sau indicatorul de atac. Doar aspectul: ce trimiți serverului rămâne la fel.",
   "sunrise.pvp.combat_indicator": "Indicatorul de atac în Legacy",
   "sunrise.pvp.combat_indicator.tooltip": "Păstrează indicatorul de atac sub Legacy, pe care 1.8.9 nu îl avea.",
-  "sunrise.pvp.combat_rules": "Luptă 1.8 în lumile pe care le găzduiești",
-  "sunrise.pvp.combat_rules.tooltip": "Single player și lumile pe care le deschizi în LAN se luptă după regulile 1.8.9: fără timp de răcire al atacului sau mătură, daune de arme 1.8, Forță, Ascuțime și lovituri critice. Serverele la care te alături își păstrează propriile reguli.",
   "sunrise.pvp.combat_sounds": "Sunete de lovire din 1.8",
   "sunrise.pvp.combat_sounds.tooltip": "Sub Legacy, omite sunetele de atac adăugate de 1.9 (puternic, slab, mătură, critic...). Sunetele de rănire rămân.",
   "sunrise.pvp.corner.bottom_left": "Stânga jos",

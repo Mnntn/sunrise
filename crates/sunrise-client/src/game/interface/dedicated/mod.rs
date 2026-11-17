@@ -225,47 +225,6 @@ fn load_chat_filter() -> Option<Box<dyn sunrise_server_files::chat_guard::ChatGu
     loaded.guard
 }
 
-/// `server.toml`'s `[combat]` (docs/pvp.md): `legacy = true` resolves melee hits by 1.8.9's rules. Off without
-/// the file or the section, and (with an error logged) when the section is wrong.
-fn load_combat() -> bool {
-    #[derive(serde::Deserialize)]
-    #[serde(deny_unknown_fields)]
-    struct Combat {
-        #[serde(default)]
-        legacy: bool,
-    }
-    let Ok(text) = std::fs::read_to_string("server.toml") else {
-        return false;
-    };
-    let section = toml::from_str::<toml::Table>(&text)
-        .map_err(|e| e.to_string())
-        .and_then(|mut t| match t.remove("combat") {
-            Some(section) => section
-                .try_into::<Combat>()
-                .map(|c| c.legacy)
-                .map_err(|e| format!("[combat]: {e}")),
-            None => Ok(false),
-        });
-    match section {
-        Ok(legacy) => {
-            if legacy {
-                log(
-                    "INFO",
-                    "1.8 combat rules on (server.toml [combat]; legacy = false turns them off)",
-                );
-            }
-            legacy
-        }
-        Err(e) => {
-            log(
-                "ERROR",
-                &format!("server.toml: {e}; fights keep 26.3's rules"),
-            );
-            false
-        }
-    }
-}
-
 /// `server.toml`'s `[entities]` (docs/server.md): `villager_lobotomize` and its check interval. Off without
 /// the file or the section, and (with an error logged) when the section is wrong.
 fn load_entities() {
@@ -1372,7 +1331,6 @@ impl Game<'_> {
         let anticheat = load_anticheat();
         let anticheat_on = anticheat.enabled;
         let chat_filter = load_chat_filter();
-        self.set_pvp_legacy_rules(load_combat());
         self.read_runtime_level_cap(|key| props.raw.get(key));
         load_entities();
         // Sunrise's far ring (docs/hosting.md): server.toml's `max_view_distance`.

@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy ritar strider som 1.8.9 gjorde: föremålet i din hand, dess sving, ätande, bågen och ett svärd som hålls uppe medan du håller använd, utan neddoppningen efter varje träff eller attackindikatorn. Bara utseendet: det du skickar till en server är detsamma.",
   "sunrise.pvp.combat_indicator": "Attackindikator i Legacy",
   "sunrise.pvp.combat_indicator.tooltip": "Behåller attackindikatorn under Legacy, som 1.8.9 inte hade.",
-  "sunrise.pvp.combat_rules": "1.8-strid i världar du hostar",
-  "sunrise.pvp.combat_rules.tooltip": "Singelspelare och världarna du öppnar för LAN slåss enligt 1.8.9:s regler: ingen attacknedkylning eller svep, 1.8-vapenskada, Styrka, Skärpa och kritiska träffar. Servrar du går med i behåller sina egna regler.",
   "sunrise.pvp.combat_sounds": "1.8-träffljud",
   "sunrise.pvp.combat_sounds.tooltip": "Under Legacy utelämnas träffljuden som 1.9 lade till (stark, svag, svep, kritisk...). Skadljud stannar.",
   "sunrise.pvp.corner.bottom_left": "Nederst till vänster",

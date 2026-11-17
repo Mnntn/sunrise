@@ -674,8 +674,6 @@
   "sunrise.pvp.combat_feel.tooltip": "Legacy-k borrokak 1.8.9-k egiten zuen bezala marrazten ditu: eskuan duzun elementua, bere kulunka, jatea, arkua eta goratutako ezpata erabiltzea sakatuta duzun bitartean, kolpe bakoitzaren ondorengo jaitsiera eta eraso-adierazlea gabe. Itxura soilik: zerbitzari bati bidaltzen diozuna berdina izaten jarraitzen du.",
   "sunrise.pvp.combat_indicator": "Eraso-adierazlea Legacy-n",
   "sunrise.pvp.combat_indicator.tooltip": "Eraso-adierazlea Legacy-ren pean mantentzen du, 1.8.9-k ez zeukana.",
-  "sunrise.pvp.combat_rules": "1.8 borroka zuk ostatatzen dituzun munduetan",
-  "sunrise.pvp.combat_rules.tooltip": "Jokalari bakarreko eta LANera irekitzen dituzun munduek 1.8.9-ren arauen arabera borrokatzen dute: erasoaren hozte eta arrasterik gabe, 1.8-ko arma-kaltea, Indarra, Zorroztasuna eta kolpe kritikoak. Sartzen zaren zerbitzariek beren arauak mantentzen dituzte.",
   "sunrise.pvp.combat_sounds": "1.8 kolpe-soinuak",
   "sunrise.pvp.combat_sounds.tooltip": "Legacy-ren pean, 1.9-k gehitutako eraso-soinuak kentzen ditu (sendoa, ahula, arrastea, kritikoa...). Min-soinuak geratzen dira.",
   "sunrise.pvp.corner.bottom_left": "Beheko ezkerra",

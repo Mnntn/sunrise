@@ -60,14 +60,7 @@ fn the_native_knockback_hook_changes_or_cancels_a_players_push() {
             let set = p.set_modifier(attribute, "sunrise:test", resistance, "add_value", true);
             set.unwrap();
         }
-        knockback::apply_player_knockback(
-            &mut p,
-            &mut test_level.level(),
-            0.4,
-            (0.0, 3.0),
-            hit,
-            false,
-        );
+        knockback::apply_player_knockback(&mut p, &mut test_level.level(), 0.4, (0.0, 3.0), hit);
         (p.velocity.x, p.velocity.y, p.velocity.z)
     };
     // No mod in the way: vanilla's push, away from z = 3.

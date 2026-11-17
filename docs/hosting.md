@@ -662,19 +662,6 @@ folders must support hard links on the same filesystem. Unix flushes files and d
 flushes files and uses write-through renames. This does not replace a backup or promise recovery from
 filesystem corruption or storage hardware that ignores flushes.
 
-### 1.8 combat: `[combat]`
-
-Fights follow 26.3's rules. For 1.8.9's (no attack cooldown or sweep, 1.8 weapon damage, Strength and
-Sharpness; the list is in [pvp.md](pvp.md#18-combat-in-worlds-you-host-combatrules-default-off)), add to
-`server.toml`, then restart:
-
-```toml
-[combat]
-legacy = true
-```
-
-Players join with any vanilla 26.3 client: only the server decides the damage.
-
 ### Mods' biome regions: `[biome_regions]`
 
 A world made with a mod that adds a [biome region](modding/src/how-to/content-mods/biome-regions.md) saves that region with the
