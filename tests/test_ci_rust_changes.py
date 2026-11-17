@@ -30,6 +30,21 @@ class RustChangesTests(unittest.TestCase):
             with self.subTest(path=path):
                 self.assertTrue(needs_rust(["README.md", path]))
 
+    def test_documentation_that_rust_embeds_or_tests_requires_rust(self):
+        for path in [
+            # Generated references that Rust tests compare with their generator's output.
+            "docs/api/server-reference.md", "docs/sunrise-ctl-commands.md",
+            # Embedded with include_str!.
+            "docs/modpacks/atm10-mods.csv", "crates/sunrise-mod-api-gen/coverage-notes.md",
+            # A page a Rust test requires to be absent: adding it fails that test.
+            "docs/modding/src/reference/hook-notes.md",
+            # A workspace crate's sources under docs/.
+            "docs/modding/examples/src/greeter.rs",
+        ]:
+            with self.subTest(path=path):
+                self.assertTrue(needs_rust(["docs/setup.md", path]))
+        self.assertFalse(needs_rust(["docs/hosting.md", "docs/modding/src/introduction.md"]))
+
     def test_launcher_checks_follow_the_crates_it_builds(self):
         for path in ["crates/sunrise-client/src/game.rs", "launcher/links.json", "launcher/docs/a.md",
                      "launcher/README.md", "website/src/index.html", "tools/pr_ready.py"]:
