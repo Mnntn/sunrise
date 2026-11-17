@@ -43,6 +43,11 @@ pub(super) fn centred(m: &MonitorHandle, number: u8) -> winit::dpi::Position {
     }
 }
 
+/// A new window's first title, unique for a moment so `above_menu_bar` finds it.
+fn marker(key: u8) -> String {
+    format!("{} {key}", crate::game::window_title::base())
+}
+
 /// The monitor's window titled `title` over that monitor's menu bar, all of it: one level above
 /// the menu bar, at the screen's whole frame. Hiding the menu bar (the presentation options) works
 /// only for the window with the keyboard, and a monitor's window opens without it. AppKit's own
@@ -454,21 +459,23 @@ impl<'a> Split<'a> {
     }
 
     /// What a window's title says: its name and who plays in it.
-    pub(super) fn title(&self, k: usize) -> String {
+    pub(super) fn title(&self, k: usize) -> Option<String> {
+        let n = self.surfaces[k].key;
+        // Window 1 is the game's own: its title is vanilla's (window_title.rs).
+        if n == 1 {
+            return None;
+        }
         let views = &self.applied;
         let who: Vec<String> = (0..self.players())
             .filter(|&i| views.get(i).is_some_and(|v| v.0 == k))
             .map(|i| self.name(i))
             .collect();
-        let name = match self.surfaces[k].key {
-            1 if self.surfaces.len() == 1 => String::new(),
-            n => format!(" - Window {n}"),
-        };
-        if self.players() > 1 && !who.is_empty() {
-            format!("Sunrise{name} · {}", who.join(", "))
+        let base = crate::game::window_title::base();
+        Some(if who.is_empty() {
+            format!("{base} - Window {n}")
         } else {
-            format!("Sunrise{name}")
-        }
+            format!("{base} - Window {n} · {}", who.join(", "))
+        })
     }
 
     /// The windows the players' screens need: the game's (hidden while nobody plays on it), one
@@ -534,7 +541,7 @@ impl<'a> Split<'a> {
                 // Its own title for a moment: `above_menu_bar` finds it by it.
                 Some((at, size)) => {
                     let attributes = attributes
-                        .with_title(format!("Sunrise {key}"))
+                        .with_title(marker(*key))
                         .with_decorations(false)
                         .with_position(at)
                         .with_inner_size(size);
@@ -562,7 +569,7 @@ impl<'a> Split<'a> {
                             }
                         }
                     }
-                    .with_title("Sunrise")
+                    .with_title(crate::game::window_title::base())
                 }
             };
             let made = event_loop
@@ -582,7 +589,7 @@ impl<'a> Split<'a> {
                 let _ = window.request_inner_size(size);
                 window.set_outer_position(at);
                 #[cfg(target_os = "macos")]
-                above_menu_bar(&format!("Sunrise {key}"));
+                above_menu_bar(&marker(*key));
             }
             match made {
                 Ok((window, compositor)) => {
@@ -622,7 +629,9 @@ impl<'a> Split<'a> {
             self.window1_shown = main_used;
         }
         for k in 0..self.surfaces.len() {
-            let title = self.title(k);
+            let Some(title) = self.title(k) else {
+                continue;
+            };
             if self.surfaces[k].title != title {
                 self.surfaces[k].window.set_title(&title);
                 self.surfaces[k].title = title;

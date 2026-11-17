@@ -68,7 +68,8 @@ KeyboardHandler.textEditing	port	crates/sunrise-client/src/game/interface/ime.rs
 KeyboardHandler.submitPreeditEvent	inline	crates/sunrise-client-render/src/preedit.rs::set_preedit	the preedit reaches the screen's field directly, and Commit types the text
 Minecraft.<init>	inline	crates/sunrise-client/src/game.rs::run_loading	the last start's startedCleanly is read by unclean_start_recovery (fullscreen dropped when it is false), then this start is marked unfinished until the handoff
 Minecraft.onGameLoadFinished	inline	crates/sunrise-client/src/game/runtime/loading_screen.rs::Loading::finish	the handoff's last two steps: startedCleanly set true and the options saved; the initial screens come from the menu handoff and there is no load-time telemetry
-Minecraft.createTitle	missing		minor: the window title is always Sunrise (with_title in game.rs), no version or world type
+Minecraft.createTitle	port	crates/sunrise-client/src/game/runtime/window_title.rs::title	the * always: ModCheck's canary is Mojang's signed client jar, which Sunrise isn't
+Minecraft.updateTitle	port	crates/sunrise-client/src/game/runtime/window_title.rs::Game::update_window_title	once a frame when the session part or the language changed, not at vanilla's call sites; the string is the same
 Minecraft.createUserApiService	skip:service
 Minecraft.abortResourcePackRecovery	missing		minor: no automatic abort when a pack keeps failing; errors stay on the Packs page
 Minecraft.addResourcePackLoadFailToast	port	crates/sunrise-client/src/game/world/packs/mod.rs::Game::reload_packs	gap: minor: the failure is a Packs-page error, not a toast
