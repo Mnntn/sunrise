@@ -125,6 +125,8 @@ pub struct Extras {
     /// painted texel of a player's outer layer drawn as a slab
     /// (`sunrise_client::mobs::skin_layers`).
     pub three_d_skin_layers: bool,
+    /// Lines no setting here reads, kept in file order so a setting that moved to a store survives a run without it.
+    pub unknown: Vec<(String, String)>,
     /// The PvP & HUD page's options (`pvp`).
     pub pvp: crate::pvp::Pvp,
 }
@@ -176,6 +178,7 @@ impl Default for Extras {
             music_off: Vec::new(),
             music_page: false,
             three_d_skin_layers: false,
+            unknown: Vec::new(),
             pvp: Default::default(),
         }
     }
@@ -283,68 +286,87 @@ impl Extras {
                 "musicPage" => e.music_page = flag(e.music_page),
                 SKIN_LAYERS_KEY => e.three_d_skin_layers = flag(e.three_d_skin_layers),
                 key => {
-                    e.pvp.parse_line(key, value);
+                    if !e.pvp.parse_line(key, value) {
+                        e.unknown.push((key.to_owned(), value.to_owned()));
+                    }
                 }
             }
         }
         e
     }
     pub fn serialize(&self) -> String {
-        let mut text = format!(
-            "packBrowser:{}\npregen:{}\nfullbright:{}\ndynamicLights:{}\nzoom:{}\nzoomKey:{}\nzoomLevel:{}\nzoomSmooth:{}\nzoomSensitivity:{}\nlodZoomDetail:{}\nfps:{}\nfpsCorner:{}\nfpsLows:{}\nkeystrokes:{}\nkeystrokesCorner:{}\nkeystrokesCps:{}\nmovedToMods:{}\nminimap:{}\nminimapCorner:{}\nminimapSize:{}\nminimapShape:{}\nminimapZoom:{}\nminimapRotate:{}\nautoReconnect:{}\nuiSoundReserve:{}\nownNameTag:{}\nskipModdedSplashesIfVanillaModified:{}\nhideBlockParticles:{}\nmouseTweaks:{}\nmouseTweaksWheel:{}\nsort:{}\nsortKey:{}\nchatAnimation:{}\nchatIndicator:{}\n{}:{}\nagentControl:{}\nreproKeys:{}\nsplitscreen:{}\nsplitscreenTwo:{}\nsplitscreenThree:{}\nsplitscreenNames:{}\nwheelCyclesListSettings:{}\nmusicOff:{}\nmusicPage:{}\n{}:{}\n",
-            bool_text(self.pack_browser),
-            bool_text(self.pregen),
-            bool_text(self.fullbright),
-            bool_text(self.dynamic_lights),
-            bool_text(self.zoom),
-            self.zoom_key,
-            self.zoom_level,
-            bool_text(self.zoom_smooth),
-            bool_text(self.zoom_sensitivity),
-            bool_text(self.lod_zoom_detail),
-            bool_text(self.fps),
-            self.fps_corner.name(),
-            bool_text(self.fps_lows),
-            bool_text(self.keystrokes),
-            self.keystrokes_corner.name(),
-            bool_text(self.keystrokes_cps),
-            self.moved.join(","),
-            bool_text(self.minimap),
-            self.minimap_corner.name(),
-            self.minimap_size,
-            if self.minimap_round {
+        self.serialize_but(&|key| sunrise_hooks::settings::engine::owned(FILE, key))
+    }
+    /// `serialize`, leaving out the kept lines `owned` claims: a store writes those itself.
+    fn serialize_but(&self, owned: &dyn Fn(&str) -> bool) -> String {
+        let mut text = String::new();
+        let mut push = |key: &str, value: &dyn std::fmt::Display| {
+            text.push_str(&format!("{key}:{value}\n"));
+        };
+        push("packBrowser", &bool_text(self.pack_browser));
+        push("pregen", &bool_text(self.pregen));
+        push("fullbright", &bool_text(self.fullbright));
+        push("dynamicLights", &bool_text(self.dynamic_lights));
+        push("zoom", &bool_text(self.zoom));
+        push("zoomKey", &self.zoom_key);
+        push("zoomLevel", &self.zoom_level);
+        push("zoomSmooth", &bool_text(self.zoom_smooth));
+        push("zoomSensitivity", &bool_text(self.zoom_sensitivity));
+        push("lodZoomDetail", &bool_text(self.lod_zoom_detail));
+        push("fps", &bool_text(self.fps));
+        push("fpsCorner", &self.fps_corner.name());
+        push("fpsLows", &bool_text(self.fps_lows));
+        push("keystrokes", &bool_text(self.keystrokes));
+        push("keystrokesCorner", &self.keystrokes_corner.name());
+        push("keystrokesCps", &bool_text(self.keystrokes_cps));
+        push("movedToMods", &self.moved.join(","));
+        push("minimap", &bool_text(self.minimap));
+        push("minimapCorner", &self.minimap_corner.name());
+        push("minimapSize", &self.minimap_size);
+        push(
+            "minimapShape",
+            &if self.minimap_round {
                 "round"
             } else {
                 "square"
             },
-            self.minimap_zoom,
-            bool_text(self.minimap_rotate),
-            bool_text(self.auto_reconnect),
-            bool_text(self.ui_sound_reserve),
-            bool_text(self.own_name_tag),
-            bool_text(self.skip_modded_splashes_if_vanilla_modified),
-            bool_text(self.hide_block_particles),
-            bool_text(self.mouse_tweaks),
-            bool_text(self.mouse_tweaks_wheel),
-            bool_text(self.sort),
-            self.sort_key,
-            bool_text(self.chat_animation),
-            bool_text(self.chat_indicator),
-            sunrise_core::no_ai::KEY,
-            bool_text(self.no_ai),
-            bool_text(self.agent_control),
-            bool_text(self.repro_keys),
-            bool_text(self.splitscreen),
-            self.splitscreen_two,
-            self.splitscreen_three,
-            bool_text(self.splitscreen_names),
-            bool_text(self.wheel_cycles_settings),
-            self.music_off.join(","),
-            bool_text(self.music_page),
-            SKIN_LAYERS_KEY,
-            bool_text(self.three_d_skin_layers),
         );
+        push("minimapZoom", &self.minimap_zoom);
+        push("minimapRotate", &bool_text(self.minimap_rotate));
+        push("autoReconnect", &bool_text(self.auto_reconnect));
+        push("uiSoundReserve", &bool_text(self.ui_sound_reserve));
+        push("ownNameTag", &bool_text(self.own_name_tag));
+        push(
+            "skipModdedSplashesIfVanillaModified",
+            &bool_text(self.skip_modded_splashes_if_vanilla_modified),
+        );
+        push("hideBlockParticles", &bool_text(self.hide_block_particles));
+        push("mouseTweaks", &bool_text(self.mouse_tweaks));
+        push("mouseTweaksWheel", &bool_text(self.mouse_tweaks_wheel));
+        push("sort", &bool_text(self.sort));
+        push("sortKey", &self.sort_key);
+        push("chatAnimation", &bool_text(self.chat_animation));
+        push("chatIndicator", &bool_text(self.chat_indicator));
+        push(sunrise_core::no_ai::KEY, &bool_text(self.no_ai));
+        push("agentControl", &bool_text(self.agent_control));
+        push("reproKeys", &bool_text(self.repro_keys));
+        push("splitscreen", &bool_text(self.splitscreen));
+        push("splitscreenTwo", &self.splitscreen_two);
+        push("splitscreenThree", &self.splitscreen_three);
+        push("splitscreenNames", &bool_text(self.splitscreen_names));
+        push(
+            "wheelCyclesListSettings",
+            &bool_text(self.wheel_cycles_settings),
+        );
+        push("musicOff", &self.music_off.join(","));
+        push("musicPage", &bool_text(self.music_page));
+        push(SKIN_LAYERS_KEY, &bool_text(self.three_d_skin_layers));
         self.pvp.serialize(&mut text);
+        for (key, value) in &self.unknown {
+            if !owned(key) {
+                text.push_str(&format!("{key}:{value}\n"));
+            }
+        }
         text
     }
     /// Adopts the settings `options.txt` held before they moved here, while
@@ -376,7 +398,7 @@ impl Extras {
         true
     }
     /// Written only once something differs from the defaults, so a vanilla
-    /// setup gains no file. The settings stores of this file follow these lines
+    /// setup gains no file, but a file holding lines nobody here owns is rewritten. The settings stores of this file follow these lines
     /// (`sunrise_hooks::settings`).
     pub fn save(&self, dir: &Path) {
         let path = dir.join(FILE);
@@ -809,6 +831,69 @@ impl Item {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    fn all_set() -> Extras {
+        Extras {
+            pack_browser: true,
+            pregen: true,
+            fullbright: true,
+            zoom: true,
+            zoom_key: "key.keyboard.c".into(),
+            fps_corner: Corner::BottomRight,
+            moved: vec!["fps_overlay".into(), "keystrokes".into()],
+            minimap_round: true,
+            minimap_size: 128,
+            minimap_zoom: 0.5,
+            music_off: vec!["a".into(), "b".into()],
+            own_name_tag: true,
+            three_d_skin_layers: true,
+            ..Extras::default()
+        }
+    }
+
+    #[test]
+    fn serialize_keeps_the_format_of_main() {
+        let default = include_str!("../tests/fixtures/extras_default.txt");
+        assert_eq!(Extras::default().serialize(), default);
+        let set = include_str!("../tests/fixtures/extras_set.txt");
+        assert_eq!(all_set().serialize(), set);
+    }
+
+    #[test]
+    fn lines_nobody_owns_survive_a_load_and_save() {
+        let text = "ownNameTag:true\ndiscordPresence:true\nfutureKey:7\n";
+        let e = Extras::parse(text);
+        assert!(e.own_name_tag);
+        assert_eq!(
+            e.unknown,
+            [
+                ("discordPresence".into(), "true".into()),
+                ("futureKey".into(), "7".into())
+            ]
+        );
+        let out = e.serialize();
+        assert!(out.contains("\nownNameTag:true\n"));
+        assert!(out.ends_with("discordPresence:true\nfutureKey:7\n"));
+        assert_eq!(Extras::parse(&out), e);
+        let dir = std::env::temp_dir().join(format!("extras-unknown-{}", std::process::id()));
+        let _ = fs::create_dir_all(&dir);
+        let only_moved = Extras::parse("discordPresence:true\n");
+        only_moved.save(&dir);
+        assert!(
+            fs::read_to_string(dir.join(FILE))
+                .unwrap()
+                .contains("discordPresence:true\n")
+        );
+        let _ = fs::remove_dir_all(dir);
+    }
+
+    #[test]
+    fn a_line_a_store_owns_is_left_to_it() {
+        let e = Extras::parse("storeOwnedKey:true\nother:1\n");
+        let text = e.serialize_but(&|key| key == "storeOwnedKey");
+        assert!(!text.contains("storeOwnedKey"));
+        assert!(text.ends_with("other:1\n"));
+    }
 
     #[test]
     fn a_saved_wheel_setting_from_before_the_default_changed_is_dropped() {

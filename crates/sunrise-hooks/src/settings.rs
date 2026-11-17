@@ -50,6 +50,11 @@ pub mod engine {
         load_into(all(), read);
     }
 
+    /// Whether a registered store claims `key` of `file`, so it writes the line itself.
+    pub fn owned(file: &str, key: &str) -> bool {
+        owns_key(all(), file, key)
+    }
+
     /// Appends the stores' lines of `file`, a file the engine writes itself, to `text`, its own
     /// lines. True when every store of that file is at its defaults (none counts).
     pub fn append(file: &str, text: &mut String) -> bool {
@@ -95,6 +100,10 @@ fn load_into(stores: &[&dyn Store], read: &mut dyn FnMut(&str) -> Option<String>
     }
 }
 
+fn owns_key(stores: &[&dyn Store], file: &str, key: &str) -> bool {
+    stores.iter().any(|s| s.file() == file && s.owns(key))
+}
+
 fn append_lines(stores: &[&dyn Store], file: &str, text: &mut String) -> bool {
     let mut default = true;
     for store in stores.iter().filter(|s| s.file() == file) {
@@ -126,7 +135,7 @@ fn save_files(stores: &[&dyn Store], dir: &Path, engine_files: &[&str]) {
         };
         // Lines no store owns: another build's, or a setting whose crate isn't in this one.
         for (line, key, _) in lines(&existing) {
-            if !stores.iter().any(|s| s.file() == file && s.owns(key)) {
+            if !owns_key(stores, file, key) {
                 text.push_str(line);
                 text.push('\n');
             }
@@ -190,6 +199,15 @@ mod tests {
         let _ = fs::remove_dir_all(&dir);
         fs::create_dir_all(&dir).unwrap();
         dir
+    }
+
+    #[test]
+    fn a_key_is_owned_only_in_its_stores_file() {
+        let zoom = Switch::new("sunrise-extras.txt", "zoom");
+        let stores: [&dyn Store; 1] = [&zoom];
+        assert!(owns_key(&stores, "sunrise-extras.txt", "zoom"));
+        assert!(!owns_key(&stores, "sunrise-pad.txt", "zoom"));
+        assert!(!owns_key(&stores, "sunrise-extras.txt", "fps"));
     }
 
     #[test]
