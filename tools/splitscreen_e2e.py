@@ -47,6 +47,11 @@ except ImportError:
     import lab
 
 ROOT = Path(__file__).resolve().parents[1]
+def game_window(name):
+    """Window 1, the game's own: its title is vanilla's, without a " - Window N" part."""
+    return name.startswith('Minecraft') and ' - Window ' not in name
+
+
 CTL = lab.cargo_target() / ('fast/sunrise-ctl' + ('.exe' if os.name == 'nt' else ''))
 RESOURCES = ROOT / '.local/sunrise-client/26.3'
 # Logical; the views are checked as fractions of what P1 gets alone, so any scale works.
@@ -1331,7 +1336,7 @@ def scenario_native_pointer():
         walk(2)
         look(2)
         native.tap('escape')
-        native.click(native.point(g.size(1), 0.5, 0.1, title='Window 1'), title='Window 1')
+        native.click(native.point(g.size(1), 0.5, 0.1, title=game_window), title=game_window)
         native.tap('escape')
         check('clicking Window 1 restores P1 capture', grabbed(), [True, False])
         walk(1)

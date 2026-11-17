@@ -9,6 +9,11 @@ import sys
 import time
 
 
+def title_matches(title, name):
+    """`title` is a substring of the window's name, or a predicate over it; None matches any window."""
+    return title is None or (title(name) if callable(title) else title in name)
+
+
 class Point(c.Structure):
     _fields_ = [('x', c.c_double), ('y', c.c_double)]
 
@@ -102,7 +107,7 @@ class MacInput:
                 try:
                     text = c.create_string_buffer(2048)
                     self.cf.CFStringGetCString(name, text, len(text), 0x08000100)
-                    if title not in text.value.decode('utf-8'):
+                    if not title_matches(title, text.value.decode('utf-8')):
                         continue
                     if self.ax.AXUIElementPerformAction(window, keys[2]) != 0:
                         raise RuntimeError(f'could not raise {title}')
@@ -120,7 +125,7 @@ class MacInput:
 
     def window(self, title=None):
         windows = [w for w in self.windows() if w.get('kCGWindowOwnerPID') == self.pid
-                   and (title is None or title in w.get('kCGWindowName', ''))]
+                   and title_matches(title, w.get('kCGWindowName', ''))]
         if not windows:
             raise RuntimeError(f'no native test window matching {title!r}')
         return windows[0]

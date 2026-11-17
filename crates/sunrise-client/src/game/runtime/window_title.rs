@@ -1,5 +1,5 @@
 //! `Minecraft.createTitle` and `updateTitle`: the window's title, as vanilla's reads.
-use super::Game;
+use super::{Game, Screen};
 
 /// `Minecraft* 26.3`: `ModCheck` reports a client that isn't Mojang's signed jar as modified.
 pub(in crate::game) fn base() -> String {
@@ -15,9 +15,11 @@ fn title(session: Option<&str>) -> String {
 }
 
 impl Game<'_> {
-    /// The session part `createTitle` adds while a connection is open.
+    /// The session part `createTitle` adds once `getConnection` has a player; none for a replay.
     fn title_session(&self) -> Option<&'static str> {
-        self.remote.as_ref()?;
+        if self.remote.is_none() || self.player.is_none() || self.replay.playing() {
+            return None;
+        }
         Some(if self.integrated.is_some() && !self.is_published() {
             "title.singleplayer"
         } else if self.realm_session {
@@ -29,9 +31,13 @@ impl Game<'_> {
         })
     }
 
-    /// Sets the title when what it reads changed (the session or the language): once a frame.
+    /// `updateTitle`: on a session change (level, publishing), and a new language once back to play.
     pub(in crate::game) fn update_window_title(&mut self) {
-        let shown = (self.title_session(), sunrise_client::lang::generation());
+        let language = match self.window_title {
+            Some((_, shown)) if self.screen != Screen::Playing => shown,
+            _ => sunrise_client::lang::generation(),
+        };
+        let shown = (self.title_session(), language);
         if self.window_title == Some(shown) {
             return;
         }
