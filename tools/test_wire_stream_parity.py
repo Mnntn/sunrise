@@ -19,8 +19,7 @@ over the scenario, and must never fall between two packets of one tick.
 
 The second form plays the same scenarios with two Sunrise clients, the second set to the Legacy combat feel with
 every combat extra on (sunrise-extras.txt: `LEGACY_EXTRAS`), and compares their streams the same way: the feel
-changes what the player sees and hears, never what the client sends, and the 1.8 rules ("in worlds you host")
-never reach a server that isn't the player's own.
+changes what the player sees and hears, never what the client sends.
 
 Sunrise runs `--headless` (no window or GPU: the ticks are what it sends from); the vanilla client runs on the
 virtual screen (`vscreen`) on Linux, from the logged-in session on macOS. Every game and server here runs in fresh temporary folders (SUNRISE_HOME,
