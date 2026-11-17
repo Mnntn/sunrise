@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
-"""Hourly check: did Mojang republish the pinned version JSON (.github/workflows/mojang-republish.yml)?
+"""Hourly check: did Mojang change a pinned version's JSON (.github/workflows/mojang-republish.yml)?
 
     python3 tools/ci/mojang_republish.py [--dry-run]
 
-Fetches Mojang's public version manifest and looks at the pinned version's entry. If its sha1 is the lock's
-`manifest_sha1` or one of `accepted_manifest_sha1` (the rule of tools/lab.py `manifest_accepted`), it prints one
-line and stops. Otherwise it downloads that version JSON and compares the client and server jar sha1s and the Java
-major version with the lock, then opens an issue "Mojang republished 26.3: <sha8>" with the sha1s, a snippet to
-paste into research-lock.json, and whether the jars are unchanged. An issue with that title, open or closed, is not opened again or commented on (no hourly noise).
-
-The lock holds no library hashes, so libraries cannot be verified from it: "jars unchanged" covers the two jars
-and the Java version only. Nothing from Mojang is stored; only hashes go in the issue. Needs the gh CLI;
---dry-run prints what it would do.
+Fetches Mojang's public version manifest and, for each version research-lock.json pins (tools/lab.py
+`pinned_versions`), looks at that version's entry. The lock's own `manifest_sha1` needs nothing. Any other sha1 is
+downloaded and compared with the lock entry by content (tools/lab.py `pinned_content_differs`: id, client and server
+jars, Java major, libraries):
+- the same content: Mojang re-issued the file for its asset index alone. tools/lab.py and sunrise-prepare accept it
+  as it is, so the check prints one line and changes nothing;
+- other content: it opens an issue "Mojang changed <version>: <sha8>" naming what differs, because Sunrise refuses
+  that file until the lock pins the new content. An issue with that title, open or closed, is not opened again or
+  commented on (no hourly noise).
+Nothing from Mojang is stored; only hashes go in the issue. Needs the gh CLI; --dry-run prints what it would do.
 """
 
 import argparse
@@ -22,9 +23,13 @@ import sys
 import urllib.request
 
 ROOT = Path(__file__).resolve().parents[2]
+# tools/lab.py: the pinned versions and the content rule.
+sys.path.append(str(ROOT / "tools"))
+import lab  # noqa: E402
+
 LOCK = ROOT / "research-lock.json"
 MANIFEST_URL = "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json"
-TITLE = "Mojang republished {version}: "
+TITLE = "Mojang changed {version}: "
 
 
 def fetch_json(url):
@@ -32,49 +37,29 @@ def fetch_json(url):
         return json.load(response)
 
 
-def accepted(game, checksum):
-    """Same rule as tools/lab.py manifest_accepted."""
-    return checksum == game["manifest_sha1"] or checksum in game.get("accepted_manifest_sha1", [])
-
-
-def plan(lock, manifest, fetch, open_issues):
-    """The action to take: None when the manifest is known, else {kind: open|skip, number, title, body, jars_unchanged}.
+def plan(game, manifest, fetch, open_issues):
+    """What to do about one pinned version (`game`, its lock entry): None when Mojang lists the pinned file,
+    {kind: same, ...} for a re-issue with the pinned content, else {kind: open|skip, number, title, body, changed}.
 
     open_issues: {title: number} of the issues, open or closed (a known one is not reported again). fetch(url) -> the JSON at url."""
-    game = lock["minecraft"]
     version = game["version"]
     entry = next((v for v in manifest.get("versions", []) if v.get("id") == version), None)
     if entry is None:
         raise ValueError(f"{version} is not in Mojang's version manifest")
     checksum = entry["sha1"]
-    if accepted(game, checksum):
+    if checksum == game["manifest_sha1"]:
         return None
-    detail = fetch(entry["url"])
-    downloads = detail.get("downloads", {})
-    found = {
-        "client_sha1": downloads.get("client", {}).get("sha1"),
-        "server_sha1": downloads.get("server", {}).get("sha1"),
-        "java_major": detail.get("javaVersion", {}).get("majorVersion"),
-    }
-    changed = sorted(key for key, value in found.items() if value != game[key])
-    asset_index = detail.get("assetIndex", {}).get("sha1")
-    verdict = ("Jars unchanged (client, server, Java major match the lock; libraries are not in the lock and were NOT "
-               "checked): the version JSON differs only elsewhere, likely the asset index."
-               if not changed else f"JARS CHANGED ({', '.join(changed)}): do not accept.")
-    lock_snippet = {"accepted_manifest_sha1": game.get("accepted_manifest_sha1", []) + [checksum]}
-    if asset_index and asset_index not in game.get("accepted_asset_index_sha1", []):
-        lock_snippet["accepted_asset_index_sha1"] = game.get("accepted_asset_index_sha1", []) + [asset_index]
-    body = (f"Mojang's manifest now lists a {version} version JSON the lock does not know.\n\n"
-            f"- manifest sha1: `{checksum}`\n- url: {entry['url']}\n- assetIndex sha1: `{asset_index}`\n"
-            f"- client sha1: `{found['client_sha1']}`, server sha1: `{found['server_sha1']}`, "
-            f"Java major: `{found['java_major']}`\n\n**{verdict}**\n\n")
+    changed = lab.pinned_content_differs(game, fetch(entry["url"]))
     if not changed:
-        body += ("To accept it, update `minecraft` in `research-lock.json` (append these to the existing lists):\n\n"
-                 f"```json\n{json.dumps(lock_snippet, indent=2)}\n```\n")
+        return {"kind": "same", "title": None, "changed": []}
+    body = (f"Mojang's manifest now lists a {version} version JSON whose content differs from the one "
+            f"`research-lock.json` pins, so Sunrise refuses it.\n\n"
+            f"- manifest sha1: `{checksum}`\n- url: {entry['url']}\n- differs: {', '.join(f'`{c}`' for c in changed)}\n\n"
+            "If this is the release Sunrise targets, pin its content in `research-lock.json` "
+            "(`python3 tools/port_regen.py` makes the block).\n")
     title = TITLE.format(version=version) + checksum[:8]
     number = open_issues.get(title)
-    return {"kind": "skip" if number else "open", "number": number, "title": title, "body": body,
-            "jars_unchanged": not changed}
+    return {"kind": "skip" if number else "open", "number": number, "title": title, "body": body, "changed": changed}
 
 
 def gh(*arguments, dry_run=False):
@@ -85,7 +70,7 @@ def gh(*arguments, dry_run=False):
 
 
 def open_issues_titled(version, dry_run=False, runner=gh):
-    """{title: number} of issues, open or closed, whose title starts with the republish prefix (no label needed)."""
+    """{title: number} of issues, open or closed, whose title starts with the prefix for this version (no label needed)."""
     prefix = TITLE.format(version=version)
     listed = json.loads(runner("issue", "list", "--state", "all", "--limit", "200", "--search",
                                f'"{prefix.strip()}" in:title', "--json", "number,title") or "[]")
@@ -98,22 +83,25 @@ def main():
     args = parser.parse_args()
     lock = json.loads(LOCK.read_text())
     manifest = fetch_json(MANIFEST_URL)
-    version = lock["minecraft"]["version"]
-    try:
-        listed = open_issues_titled(version)
-    except (subprocess.CalledProcessError, FileNotFoundError):
-        if not args.dry_run:
-            raise
-        listed = {}
-    action = plan(lock, manifest, fetch_json, listed)
-    if action is None:
-        print(f"{version}: Mojang's version JSON is known to the lock, nothing to do.")
-        return 0
-    print(f"{action['kind']}: {action['title']} (jars unchanged: {action['jars_unchanged']})")
-    if action["kind"] == "open":
-        gh("issue", "create", "--title", action["title"], "--body", action["body"], dry_run=args.dry_run)
-    if args.dry_run:
-        print(action["body"])
+    for game in lab.pinned_versions(lock):
+        version = game["version"]
+        try:
+            listed = open_issues_titled(version)
+        except (subprocess.CalledProcessError, FileNotFoundError):
+            if not args.dry_run:
+                raise
+            listed = {}
+        action = plan(game, manifest, fetch_json, listed)
+        if action is None:
+            print(f"{version}: Mojang lists the pinned version JSON, nothing to do.")
+        elif action["kind"] == "same":
+            print(f"{version}: Mojang re-issued the version JSON with the pinned content, nothing to do.")
+        else:
+            print(f"{action['kind']}: {action['title']} (differs: {', '.join(action['changed'])})")
+            if action["kind"] == "open":
+                gh("issue", "create", "--title", action["title"], "--body", action["body"], dry_run=args.dry_run)
+            if args.dry_run:
+                print(action["body"])
     return 0
 
 

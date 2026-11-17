@@ -3,7 +3,8 @@
 sunrise-prepare artifacts::tests::a_folder_missing_a_library_loses_to_a_complete_one lib daily child-process
 sunrise-prepare artifacts::tests::a_prism_install_prepares_without_a_server_jar lib daily child-process
 sunrise-prepare artifacts::tests::a_prism_install_without_netty_natives_prepares lib daily child-process
-sunrise-prepare artifacts::tests::a_rewritten_version_file_falls_back_to_mojangs lib daily child-process
+sunrise-prepare artifacts::tests::a_reissued_version_file_with_the_pinned_content_is_used lib daily child-process
+sunrise-prepare artifacts::tests::a_rewritten_version_file_is_used_by_its_content_else_mojangs lib daily child-process
 sunrise-prepare artifacts::tests::an_atlauncher_install_prepares lib daily child-process
 sunrise-prepare artifacts::tests::imported_files_are_reused_without_the_official_install lib daily child-process
 sunrise-prepare artifacts::tests::named_inputs_prepare_without_a_minecraft_folder lib daily child-process
