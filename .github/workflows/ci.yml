@@ -9,6 +9,34 @@ name: checks
 on:
   pull_request:
     types: [opened, synchronize, reopened]
+    # Not for a pull request that changes only documentation: dyna-checks' verify-static runs the same tree checks and
+    # Python tests on every pull request, a fork's too, and nothing here builds documentation. Documentation that Rust
+    # embeds or tests still starts it (tools/ci/rust_changes.py's rust_reads; tests/test_ci_pr_filters.py holds this
+    # list to it), as do the generated pages a Rust test requires to be absent. The schedule and dispatches are
+    # unchanged.
+    paths:
+      - '**'
+      - '!docs/**'
+      - '!**/*.md'
+      - 'docs/api/*-reference*.md'
+      - 'docs/media/brand/**'
+      - 'docs/modding/examples/**'
+      - 'docs/modding/src/how-to/native-mods.md'
+      - 'docs/modding/src/how-to/native-mods/07-local-developer-builds.md'
+      - 'docs/modding/src/reference/hook-notes.md'
+      - 'docs/modding/src/reference/neoforge-counterparts.md'
+      - 'docs/modpacks/atm10-mods.csv'
+      - 'docs/parity/random-chance-seeded.jsonl'
+      - 'docs/sunrise-ctl-commands.md'
+      - 'crates/sunrise-mod-api-gen/coverage-notes.md'
+      - 'crates/sunrise-mod-api/src/parts/blocks_fixtures/README.md'
+      - 'crates/sunrise-mod-vocab/src/wire/traits/README.md'
+      - 'crates/sunrise-shader-api/packs/*/README.md'
+      - 'crates/sunrise-shader-api/tests/samples/*/README.md'
+      - 'crates/sunrise-shaders/tests/packs/*/README.md'
+      - 'crates/sunrise-telemetry-server/tests/fixtures/**/README.md'
+      - 'launcher/docs/launcher-commands.md'
+      - 'tests/fixtures/**/README.md'
   schedule:
     - cron: '41 */6 * * *'
   workflow_dispatch:
