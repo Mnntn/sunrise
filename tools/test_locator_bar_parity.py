@@ -266,7 +266,7 @@ def sides(name, binary=None):
                                                       cwd=lab.ROOT, text=True))
         binary = Path(metadata['target_directory']) / 'fast' / ('sunrise-client.exe' if os.name == 'nt' else 'sunrise-client')
     vanilla_server = ['java', '-Xmx2g', '-Duser.timezone=UTC', '-cp', dependencies, 'net.minecraft.server.Main', 'nogui']
-    sunrise_server = [binary, '--resources', lab.LOCAL / 'sunrise-client/26.3', '--dedicated', '--nogui']
+    sunrise_server = [binary, '--resources', lab.RESOURCES, '--dedicated', '--nogui']
     client = ['java', '-Xmx1g', '-cp', str(classes) + os.pathsep + dependencies, 'dev.sunriselab.parity.LocatorBarClient']
     return lock, build, vanilla_server, sunrise_server, client
 

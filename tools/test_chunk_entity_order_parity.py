@@ -51,7 +51,7 @@ def vanilla():
 
 def engine():
     resources = os.environ.get('SUNRISE_TEST_RESOURCES') or str(
-        lab.LOCAL / 'sunrise-client' / '26.3')
+        lab.RESOURCES)
     return subprocess.check_output([
         'cargo', 'test', '-p', 'sunrise-client', '--lib', TEST,
         '--', '--ignored', '--exact', f'game::persist::lookup_order_tests::{TEST}',
