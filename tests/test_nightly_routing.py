@@ -143,7 +143,7 @@ console.log(JSON.stringify(Boolean(eval(s.expression))));
         routes = json.loads((ROOT / "crates/sunrise-mod-package/src/sdk/inputs.json").read_text())["routes"]
         programs = {route: {name for name in routes[route]["program"] if "." not in name} for route in ["package", "package-server"]}
         # The client's checks loop over $PROGRAMS, which a step reads from the checked-out package route.
-        listed = re.search(r"\['routes'\]\['package'\]\['program'\]", text)
+        listed = re.search(r"\.get\('routes', \{\}\)\.get\('package', \{\}\)\.get\('program'\)", text)
         self.assertTrue(listed and 'PROGRAMS=sunrise-client $programs' in text)
         loop = '$(for binary in $PROGRAMS; do echo "$BIN/$binary"; done)'
         text = text.replace(loop, " ".join(sorted(programs["package"] | {"sunrise-client"})))

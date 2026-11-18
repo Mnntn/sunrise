@@ -166,11 +166,7 @@ pub fn install(checkout: &Path, program: &Path, trusted: bool) -> Result<String,
         return Err(tr("Choose a real sunrise-client executable built for this computer.").into());
     }
     let mut missing = Vec::new();
-    for name in [
-        "sunrise-ctl",
-        "sunrise-prepare",
-        "sunrise-server",
-    ] {
+    for name in ["sunrise-ctl", "sunrise-prepare", "sunrise-server"] {
         let name = format!("{name}{}", std::env::consts::EXE_SUFFIX);
         if !program.with_file_name(&name).is_file() {
             missing.push(name);
@@ -309,12 +305,14 @@ mod tests {
     fn dirty_tracked_checkout_is_refused_but_local_commit_is_snapshotted() {
         let folder = tempfile::tempdir().unwrap();
         let git = |args: &[&str]| {
-            assert!(Command::new("git")
-                .current_dir(folder.path())
-                .args(args)
-                .status()
-                .unwrap()
-                .success());
+            assert!(
+                Command::new("git")
+                    .current_dir(folder.path())
+                    .args(args)
+                    .status()
+                    .unwrap()
+                    .success()
+            );
         };
         git(&["init", "-q"]);
         fs::write(folder.path().join("input"), "committed").unwrap();
@@ -339,9 +337,11 @@ mod tests {
             "committed"
         );
         fs::write(folder.path().join("input"), "dirty").unwrap();
-        assert!(committed_snapshot(folder.path())
-            .unwrap_err()
-            .contains("Commit your changes first"));
+        assert!(
+            committed_snapshot(folder.path())
+                .unwrap_err()
+                .contains("Commit your changes first")
+        );
     }
     /// A checkout with the exporters manifest, and a game program beside the given companions.
     fn packaging_inputs(
@@ -375,11 +375,7 @@ mod tests {
         }
         (folder, checkout, program)
     }
-    const COMPANIONS: [&str; 3] = [
-        "sunrise-ctl",
-        "sunrise-prepare",
-        "sunrise-server",
-    ];
+    const COMPANIONS: [&str; 3] = ["sunrise-ctl", "sunrise-prepare", "sunrise-server"];
     const REMEDY: &str = "Build the game program (the --program file) and its companions with cargo build -p sunrise-game -p sunrise-client-lib --bin sunrise-ctl -p sunrise-prepare -p sunrise-server. Run sunrise-prepare compile-exporters --root CHECKOUT, then copy its server, client and manifest.json into CHECKOUT/exporters/.";
     #[test]
     fn a_missing_wasm_standard_library_is_named_with_its_generation_command_before_packaging() {
@@ -421,8 +417,7 @@ mod tests {
             install(&checkout, &program, true).unwrap_err(),
             "The developer checkout has no HEAD commit."
         );
-        let (_other, checkout, program) =
-            packaging_inputs(&["sunrise-ctl", "sunrise-prepare"]);
+        let (_other, checkout, program) = packaging_inputs(&["sunrise-ctl", "sunrise-prepare"]);
         fs::write(program.with_file_name("sunrise-wasm-std.wasm"), "").unwrap();
         let error = install(&checkout, &program, true).unwrap_err();
         assert!(

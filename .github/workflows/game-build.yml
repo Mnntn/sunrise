@@ -264,9 +264,12 @@ jobs:
         run: |
           set -euo pipefail
           list=crates/sunrise-mod-package/src/sdk/inputs.json
+          programs=""
           if [[ -f "$list" ]]; then
-            programs=$(${{ runner.os == 'Windows' && 'python' || 'python3' }} -c "import json, sys; print(' '.join(p for p in json.load(open(sys.argv[1]))['routes']['package']['program'] if not p.endswith('.wasm')))" "$list" | tr -d '\r')
-          else
+            programs=$(${{ runner.os == 'Windows' && 'python' || 'python3' }} -c "import json, sys; listed = json.load(open(sys.argv[1])).get('routes', {}).get('package', {}).get('program'); print('-' if listed is None else ' '.join(p for p in listed if not p.endswith('.wasm')))" "$list" | tr -d '\r')
+          fi
+          # No list or no package route: the programs every release folder took before the list existed.
+          if [[ -z "$programs" || "$programs" == "-" ]]; then
             programs="sunrise-ctl sunrise-perf sunrise-prepare sunrise-server sunrise-port-pack"
           fi
           build=""
