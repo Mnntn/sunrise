@@ -549,10 +549,16 @@ A crate lists something the game ships that is not an installed mod on the Mods 
 plain data (id, name, version, authors, licence and its link, homepage, issues, description). `authors` and
 `description` are translation keys; the rest are proper names, versions and addresses, shown as written.
 
-- The screen lists Minecraft, then every registered row in registration order, then the installed mods. No row
-  replaces another.
+- The screen's entries are Minecraft, every registered row (registration order is their insertion order) and the
+  installed mods; it shows them sorted by name, reversed on request, as `ModListScreen` does. No row replaces
+  another.
 - With nothing registered (the plain `sunrise-game` and `sunrise-client` executables), the screen lists Minecraft
   and the mods only.
+- A row's text belongs to the crate that registers it, in its own lang folder (`sunrise-official` ships the
+  Sunrise row's credit there).
+- This is the interim path for what the game ships beside the mods. How Sunrise-layer crates register is still
+  open (ari's "built-in mods" or these registries); if built-in mods win, the Sunrise row comes from their ordinary
+  mod metadata and this registry goes. A mod's own row always comes from its metadata.
 
 ## Extras that may leave the game
 

@@ -1394,6 +1394,8 @@ mod tests {
         });
         let ids: Vec<_> = screen.entries.iter().map(|e| e.id.as_str()).collect();
         assert_eq!(ids, ["minecraft", "first", "second"]);
+        // The list itself is sorted by name, as ModListScreen's is.
+        assert_eq!(names(&screen), ["Alpha", "Beta", "Minecraft"]);
         let entry = &screen.entries[1];
         assert_eq!(
             (entry.authors.as_str(), entry.description.as_str()),

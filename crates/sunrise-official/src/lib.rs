@@ -9,7 +9,7 @@
 #![forbid(unsafe_code)]
 
 use sunrise_platform::hooks::{self, GetTheGame, Hooks};
-use sunrise_platform::{mod_rows, pages, release, settings};
+use sunrise_platform::{lang, mod_rows, pages, release, settings};
 
 /// Every Sunrise part in the game, in the order its hooks run.
 const PARTS: [&dyn Hooks; 5] = [
@@ -63,12 +63,16 @@ const STORES: [&dyn settings::Store; 1] = [&sunrise_discord::SETTING];
 /// Their rows and pages in the options screens.
 const PAGES: [&dyn pages::Page; 1] = [&sunrise_discord::SECTION];
 
+/// The text of Sunrise's own rows, loaded with the game's.
+static LANG: &lang::Files = &[("en_us", include_str!("../assets/lang/en_us.json"))];
+
 /// Registers Sunrise's in-game parts with the game. The executable calls it before it runs the
 /// game, and so does the launcher's generated executable for native mods.
 pub fn register() {
     let late = PARTS.into_iter().map(hooks::register);
     let late = late.chain(STORES.into_iter().map(settings::register));
     let late = late.chain(std::iter::once(mod_rows::register(&SUNRISE_ROW)));
+    let late = late.chain(std::iter::once(lang::register(LANG)));
     for result in late.chain(PAGES.into_iter().map(pages::register)) {
         if let Err(e) = result {
             // The executable registered after starting the game: a bug, not a player's problem.
